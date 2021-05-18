@@ -7,6 +7,7 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: QudsSplashView(
+        showIndicator: true,
         onCompleted: () => Navigator.pushReplacement(
             context,
             MaterialPageRoute(

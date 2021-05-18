@@ -128,14 +128,18 @@ class _State extends State<DialogsScreen> {
         .then((value) {
       switch (value) {
         case 'save':
-          showQudsToast(context, content: Text('Saved!'), leadingActions: [
-            QudsAutoAnimatedCombinedIcons(
-                startIcon: Icons.save, endIcon: Icons.done)
-          ]);
+          showQudsToast(context,
+              toastTime: QudsToastTime.VeryShort,
+              content: Text('Saved!'),
+              leadingActions: [
+                QudsAutoAnimatedCombinedIcons(
+                    startIcon: Icons.save, endIcon: Icons.done)
+              ]);
           break;
 
         case 'cancel':
-          showQudsToast(context, content: Text('Canceled!'));
+          showQudsToast(context,
+              toastTime: QudsToastTime.VeryShort, content: Text('Canceled!'));
           break;
       }
     });
@@ -154,6 +158,7 @@ class _State extends State<DialogsScreen> {
           child: Text('Delete Dialog'),
           onPressed: () => showQudsConfirmDeleteDialog(context,
               onDeletePressed: () => showQudsToast(context,
+                  toastTime: QudsToastTime.VeryShort,
                   leadingActions: [
                     QudsAutoAnimatedCombinedIcons(
                         startIcon: Icons.delete, endIcon: Icons.done)
@@ -162,7 +167,9 @@ class _State extends State<DialogsScreen> {
                   trailingActions: [
                     InkWell(
                         onTap: () {
-                          showQudsToast(context, content: Text('Undo pressed'));
+                          showQudsToast(context,
+                              toastTime: QudsToastTime.VeryShort,
+                              content: Text('Undo pressed'));
                         },
                         child: Container(
                             padding: EdgeInsets.all(5),

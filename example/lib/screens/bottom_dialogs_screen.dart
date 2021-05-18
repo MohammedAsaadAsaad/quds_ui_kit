@@ -72,7 +72,8 @@ class _State extends State<BottomDialogsScreen> {
             fontWeight: FontWeight.bold,
           )),
       ElevatedButton(
-          onPressed: () => showQudsToast(context, content: Text('Test toast')),
+          onPressed: () => showQudsToast(context,
+              toastTime: QudsToastTime.VeryShort, content: Text('Test toast')),
           child: Text('With content')),
       SizedBox(
         height: 5,
@@ -95,6 +96,7 @@ class _State extends State<BottomDialogsScreen> {
       ElevatedButton(
           onPressed: () => showQudsToast(context,
                   content: Text('Deleted!'),
+                  toastTime: QudsToastTime.VeryShort,
                   trailingActions: [
                     InkWell(
                         onTap: () {},
