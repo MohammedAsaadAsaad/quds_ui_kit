@@ -1,0 +1,17 @@
+name: quds_ui_kit
+description: Flutter UI kit [animating (icons, icon buttons, texts, counter, digital clock) - toasts - dialogs-  pagination - splash screen ...etc ]
+version: 0.0.1
+author:
+homepage:
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
