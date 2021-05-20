@@ -68,13 +68,17 @@ class _State extends State<ViewersScreen> {
         height: 5,
       ),
       QudsDigitalClockViewer(
-          // showSeconds: true,
-          // showMilliSeconds: true,
-          ),
+        timePeriodStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+        // showSeconds: true,
+        // showMilliSeconds: true,
+      ),
       SizedBox(
         height: 5,
       ),
       QudsDigitalClockViewer(
+        style: TextStyle(color: Colors.yellow, fontSize: 30),
+        backgroundColor: Colors.grey[900],
+        showTimePeriod: false,
         showSeconds: true,
         // showMilliSeconds: true,
       ),

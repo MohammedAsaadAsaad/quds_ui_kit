@@ -6,17 +6,21 @@ Future showQudsToast(BuildContext context,
     Widget? content,
     List<Widget>? leadingActions,
     List<Widget>? trailingActions,
+    Color? backgroundColor,
+    Color? shadowColor,
     Duration? displayDuration,
     QudsToastTime? toastTime = QudsToastTime.Normal}) async {
   var theme = Theme.of(context);
+  var backColor = backgroundColor ?? theme.primaryColor.withOpacity(0.75);
+  var shColor = shadowColor ?? Colors.black54;
   Widget snackContent = Row(
     mainAxisAlignment: alignment,
     children: [
       Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(4),
-              boxShadow: [BoxShadow(color: Colors.black54, blurRadius: 5)],
-              color: theme.primaryColor),
+              boxShadow: [BoxShadow(color: shColor, blurRadius: 5)],
+              color: backColor),
           child: Material(
               color: Colors.transparent,
               child: Container(
@@ -33,7 +37,7 @@ Future showQudsToast(BuildContext context,
                       ],
                       DefaultTextStyle(
                           style: theme.primaryTextTheme.bodyText1!
-                              .copyWith(fontSize: 16),
+                              .copyWith(fontSize: 18),
                           child: content ??
                               Container(
                                 width: 5,

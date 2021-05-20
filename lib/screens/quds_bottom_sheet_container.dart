@@ -64,12 +64,12 @@ class _BottomSheetContainer extends StatelessWidget {
         children: [
           Container(
             margin: EdgeInsets.symmetric(vertical: 10),
-            width: 50,
+            width: 35,
             height: 4,
             decoration: BoxDecoration(
                 // boxShadow: [BoxShadow(offset: Offset(0.2, 0.2))],
                 borderRadius: BorderRadius.circular(10),
-                color: Colors.grey[300]),
+                color: Colors.grey[400]),
           ),
           if (title != null)
             Container(

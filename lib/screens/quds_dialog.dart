@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -131,18 +133,25 @@ Future<T?> showQudsDialog<T>(BuildContext context,
     List<Widget>? leadingActions,
     AlignmentGeometry alignment = Alignment.center,
     Color? backgroundColor,
-    BorderRadius? borderRadius}) async {
+    BorderRadius? borderRadius,
+    bool withBlur = true}) async {
   return await showDialog<T>(
       context: context,
-      builder: (c) => QudsDialog(
-          child: child ?? (builder == null ? null : builder(context)),
-          insetPadding: insetPadding,
-          actions: actions,
-          alignment: alignment,
-          leadingActions: leadingActions,
-          title: title,
-          borderRadis: borderRadius,
-          backgroundColor: backgroundColor));
+      barrierColor: !withBlur ? null : Colors.black12,
+      builder: (c) => AnimatedOpacity(
+          opacity: 1,
+          duration: const Duration(milliseconds: 1000),
+          child: QudsAutoAnimatedOpacity(
+              child: QudsDialog(
+                  child: child ?? (builder == null ? null : builder(context)),
+                  insetPadding: insetPadding,
+                  actions: actions,
+                  alignment: alignment,
+                  leadingActions: leadingActions,
+                  title: title,
+                  withBlur: withBlur,
+                  borderRadis: borderRadius,
+                  backgroundColor: backgroundColor))));
 }
 
 const EdgeInsets _defaultDialogInsetPadding =
@@ -158,6 +167,7 @@ class QudsDialog extends StatelessWidget {
   final AlignmentGeometry alignment;
   final BorderRadius? borderRadis;
   final Color? backgroundColor;
+  final bool withBlur;
 
   const QudsDialog(
       {Key? key,
@@ -168,59 +178,66 @@ class QudsDialog extends StatelessWidget {
       this.leadingActions,
       this.borderRadis,
       this.actions,
-      this.backgroundColor})
+      this.backgroundColor,
+      this.withBlur = true})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
+
+    Widget body = Material(
+        elevation: 5,
+        color: backgroundColor,
+        borderRadius: this.borderRadis ?? _defaultDialogBorderRadius,
+        child: SafeArea(
+            child: Container(
+          padding: EdgeInsets.all(10),
+          child: IntrinsicWidth(
+              child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (leadingActions != null || title != null) ...[
+                Row(
+                  children: [
+                    if (leadingActions != null) ...[
+                      ...leadingActions!,
+                      SizedBox(
+                        width: 5,
+                      )
+                    ],
+                    if (title != null)
+                      DefaultTextStyle(
+                          style: theme.textTheme.headline5!, child: title!),
+                  ],
+                ),
+                SizedBox(height: 5),
+              ],
+              child ?? Container(),
+              if (actions != null) ...[
+                SizedBox(
+                  height: 5,
+                ),
+                Container(
+                    alignment: AlignmentDirectional.centerEnd,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [...actions!],
+                    ))
+              ]
+            ],
+          )),
+        )));
+
+    if (withBlur)
+      body = BackdropFilter(
+          filter: new ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+          child: body);
     return Container(
       alignment: this.alignment,
       padding: this.insetPadding,
-      child: Container(
-          child: Material(
-              color: backgroundColor,
-              borderRadius: this.borderRadis ?? _defaultDialogBorderRadius,
-              child: SafeArea(
-                  child: Container(
-                padding: EdgeInsets.all(10),
-                child: IntrinsicWidth(
-                    child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    if (leadingActions != null || title != null) ...[
-                      Row(
-                        children: [
-                          if (leadingActions != null) ...[
-                            ...leadingActions!,
-                            SizedBox(
-                              width: 5,
-                            )
-                          ],
-                          if (title != null)
-                            DefaultTextStyle(
-                                style: theme.textTheme.headline5!,
-                                child: title!),
-                        ],
-                      ),
-                      SizedBox(height: 5),
-                    ],
-                    child ?? Container(),
-                    if (actions != null) ...[
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Container(
-                          alignment: AlignmentDirectional.centerEnd,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [...actions!],
-                          ))
-                    ]
-                  ],
-                )),
-              )))),
+      child: body,
     );
   }
 }

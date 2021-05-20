@@ -2,6 +2,7 @@
 
 This library consists of:
 * Animating widgets with simple controlling, events capturing.
+* Page Transitions
 * Toasts
 * Bottom sheets
 * Dialogs
@@ -92,6 +93,24 @@ Other Buttons:
 ![](https://i.imgur.com/klKJ0Rg.gif)
 <br>
 <br>
+
+## Page Transitions
+Wide collection of page route tranistion are now supported in `Quds UI Kit`
+* Fade QudsFadePageRoute({duration, curve})
+* Rotation QudsRotatePageRoute({duration, curve, alignment})
+* Slide QudsSlidePageRoute({direction[`Up` `Down` `Left` `Right` `Start` `End`], duration, curve})
+* Zoom QudsZoomPageRoute({duration, curve, alignment})
+* Combined QudsTransitionPageRoute({withFade, withRotate, withSlide, withScale, rotateAlignment, scaleAlignment, duration, curve})
+
+```
+Navigator.push(
+                context,
+                QudsSlidePageRoute(
+                  builder: (c) => _SecondScreen(),
+                  slideDirection: SlideDirection.Up, //Default [SlideDirection.Start]
+                ))
+```
+![](https://imgur.com/Te1G7ib.gif)
 
 ## Toasts
 Customized toasts with easy control,

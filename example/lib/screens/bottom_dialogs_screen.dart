@@ -96,7 +96,7 @@ class _State extends State<BottomDialogsScreen> {
       ElevatedButton(
           onPressed: () => showQudsToast(context,
                   content: Text('Deleted!'),
-                  toastTime: QudsToastTime.VeryShort,
+                  toastTime: QudsToastTime.Normal,
                   trailingActions: [
                     InkWell(
                         onTap: () {},
@@ -109,6 +109,17 @@ class _State extends State<BottomDialogsScreen> {
                             )))
                   ]),
           child: Text('With trailing actions')),
+      SizedBox(
+        height: 5,
+      ),
+      ElevatedButton(
+          onPressed: () => showQudsToast(
+                context,
+                backgroundColor: Colors.red,
+                content: Text('Colored!'),
+                toastTime: QudsToastTime.Normal,
+              ),
+          child: Text('Colored toast')),
       SizedBox(
         height: 5,
       ),

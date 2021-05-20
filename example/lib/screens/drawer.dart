@@ -1,5 +1,6 @@
 import 'package:example/screens/buttons_screen.dart';
 import 'package:example/screens/dialogs_screen.dart';
+import 'package:example/screens/page_transitions_screen.dart';
 import 'package:example/screens/viewers_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,13 @@ class MainDrawer extends StatelessWidget {
     return QudsLightDrawer(
       bottomAboutButton: Row(
         children: [
+          Container(
+              child: Image.asset(
+            'assets/gif/test_anim.gif',
+            height: 45,
+            gaplessPlayback: true,
+            repeat: ImageRepeat.noRepeat,
+          )),
           Icon(Icons.info_outline),
           SizedBox(
             width: 10,
@@ -33,8 +41,23 @@ class MainDrawer extends StatelessWidget {
             title: Text('Animations'),
             onTap: () {
               Navigator.pop(context);
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (c) => AnimationsScreen()));
+              Navigator.push(
+                  context,
+                  QudsZoomPageRoute(
+                      builder: (c) => AnimationsScreen(),
+                      transitionColor: Colors.black87));
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.pages_outlined),
+            title: Text('Page Transitions'),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (c) => PageTransitionsScreen(),
+                  ));
             },
           ),
           ListTile(

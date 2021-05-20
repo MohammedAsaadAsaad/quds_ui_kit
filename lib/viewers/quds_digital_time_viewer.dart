@@ -8,6 +8,11 @@ class QudsDigitalTimeViewer extends StatelessWidget {
   final int? milliSecond;
   final TextStyle style;
   final bool format24;
+  final bool showTimePeriod;
+  final TextStyle timePerionStyle;
+  final String amText;
+  final String pmText;
+  final Color? backgroundColor;
 
   const QudsDigitalTimeViewer(
       {Key? key,
@@ -16,8 +21,13 @@ class QudsDigitalTimeViewer extends StatelessWidget {
       this.second,
       this.milliSecond,
       this.format24 = true,
+      this.showTimePeriod = true,
+      this.amText = 'AM',
+      this.pmText = 'PM',
+      this.timePerionStyle = const TextStyle(fontSize: 24),
       this.style =
-          const TextStyle(fontSize: 24, letterSpacing: 3, color: Colors.white)})
+          const TextStyle(fontSize: 24, letterSpacing: 3, color: Colors.white),
+      this.backgroundColor})
       : assert(hour == null || (hour >= 0 && hour < 24)),
         assert(minute == null || (minute >= 0 && minute < 60)),
         assert(second == null || (second >= 0 && second < 60)),
@@ -25,12 +35,23 @@ class QudsDigitalTimeViewer extends StatelessWidget {
         super(key: key);
   @override
   Widget build(BuildContext context) {
+    bool isMorning = hour != null && hour! < 12;
+
     return Directionality(
       textDirection: TextDirection.ltr,
       child: IntrinsicHeight(
           child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
+          if (hour != null && showTimePeriod) ...[
+            QudsAnimatedText(
+              isMorning ? amText : pmText,
+              style: timePerionStyle,
+            ),
+            SizedBox(
+              width: 5,
+            )
+          ],
           if (hour != null)
             _buildNumberBlock(
                 context, format24 ? hour! : (hour! <= 12 ? hour! : hour! - 12)),
@@ -56,11 +77,11 @@ class QudsDigitalTimeViewer extends StatelessWidget {
       ));
 
   Widget _buildNumberBlock(BuildContext context, int number, [int? length]) {
-    var theme = Theme.of(context);
+    var backColor = this.backgroundColor ?? Theme.of(context).primaryColor;
     return Container(
       padding: EdgeInsets.all(3),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(4), color: theme.primaryColor),
+          borderRadius: BorderRadius.circular(4), color: backColor),
       child:
           QudsAnimatedCounter(number, length: length ?? 2, style: this.style),
     );

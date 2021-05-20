@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:quds_ui_kit/animations/quds_animated_text.dart';
 import 'package:quds_ui_kit/quds_ui_kit.dart';
 
 class QudsDigitalClockViewer extends StatefulWidget {
@@ -11,9 +10,10 @@ class QudsDigitalClockViewer extends StatefulWidget {
   final bool format24;
   final bool showTimePeriod;
   final TextStyle style;
-  final TextStyle timePerionStyle;
+  final TextStyle timePeriodStyle;
   final String amText;
   final String pmText;
+  final Color? backgroundColor;
 
   const QudsDigitalClockViewer(
       {Key? key,
@@ -24,9 +24,10 @@ class QudsDigitalClockViewer extends StatefulWidget {
       this.format24 = true,
       this.showTimePeriod = true,
       this.style = const TextStyle(fontSize: 18, color: Colors.white),
-      this.timePerionStyle = const TextStyle(fontSize: 18),
+      this.timePeriodStyle = const TextStyle(fontSize: 18),
       this.amText = 'AM',
-      this.pmText = 'PM'})
+      this.pmText = 'PM',
+      this.backgroundColor})
       : super(key: key);
 
   @override
@@ -47,31 +48,19 @@ class _State extends State<QudsDigitalClockViewer> {
   @override
   Widget build(BuildContext context) {
     var t = DateTime.now();
-    bool isMorning = t.hour < 12;
-    return Directionality(
-        textDirection: TextDirection.ltr,
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            if (widget.showTimePeriod) ...[
-              QudsAnimatedText(
-                isMorning ? widget.amText : widget.pmText,
-                style: widget.timePerionStyle,
-              ),
-              SizedBox(
-                width: 5,
-              )
-            ],
-            QudsDigitalTimeViewer(
-              format24: widget.format24,
-              hour: widget.showHour ? t.hour : null,
-              minute: widget.showMinute ? t.minute : null,
-              second: widget.showSeconds ? t.second : null,
-              milliSecond: widget.showMilliSeconds ? t.millisecond : null,
-              style: widget.style,
-            )
-          ],
-        ));
+    return QudsDigitalTimeViewer(
+      backgroundColor: widget.backgroundColor,
+      showTimePeriod: widget.showTimePeriod,
+      timePerionStyle: widget.timePeriodStyle,
+      amText: widget.amText,
+      pmText: widget.pmText,
+      format24: widget.format24,
+      hour: widget.showHour ? t.hour : null,
+      minute: widget.showMinute ? t.minute : null,
+      second: widget.showSeconds ? t.second : null,
+      milliSecond: widget.showMilliSeconds ? t.millisecond : null,
+      style: widget.style,
+    );
   }
 
   @override

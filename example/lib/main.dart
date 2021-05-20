@@ -14,6 +14,8 @@ class MyApp extends StatelessWidget {
       title: 'Quds UI Kit Example',
       theme: ThemeData(brightness: Brightness.light),
       home: SplashScreen(),
+      builder: (context, child) =>
+          Directionality(textDirection: TextDirection.ltr, child: child!),
     );
   }
 }

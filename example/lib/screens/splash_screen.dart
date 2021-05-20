@@ -10,7 +10,7 @@ class SplashScreen extends StatelessWidget {
         showIndicator: true,
         onCompleted: () => Navigator.pushReplacement(
             context,
-            MaterialPageRoute(
+            QudsZoomPageRoute(
               builder: (context) => MyHomePage(),
             )),
       ),
