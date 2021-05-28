@@ -18,7 +18,7 @@ class QudsTransitionPageRoute<T> extends PageRoute<T> {
 
   QudsTransitionPageRoute(
       {required this.builder,
-      this.duration = const Duration(milliseconds: 350),
+      this.duration = const Duration(milliseconds: 250),
       this.transitionColor = Colors.black,
       this.withFade = true,
       this.withRotate = false,

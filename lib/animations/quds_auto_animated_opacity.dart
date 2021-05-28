@@ -12,7 +12,7 @@ class QudsAutoAnimatedOpacity extends StatefulWidget {
   final double finalOpacity;
 
   /// [curve] the curve of the transition velocity.
-  /// [duration] the duration of the transition, initially set to `350 ms`
+  /// [duration] the duration of the transition, initially set to `250 ms`
   /// [startAnimationAfter] the duration before the initially shown icon to
   /// start transit.
   const QudsAutoAnimatedOpacity(
@@ -20,7 +20,7 @@ class QudsAutoAnimatedOpacity extends StatefulWidget {
       this.initialOpacity = 0,
       this.finalOpacity = 1,
       this.curve = Curves.easeIn,
-      this.duration = const Duration(milliseconds: 350),
+      this.duration = const Duration(milliseconds: 250),
       this.startAnimationAfter = const Duration(milliseconds: 10)})
       : assert(initialOpacity >= 0 && initialOpacity <= 1),
         assert(finalOpacity >= 0 && finalOpacity <= 1);

@@ -31,7 +31,7 @@ class QudsAutoAnimatedCombinedIcons extends StatefulWidget {
   /// and automatically transit to [endIcon].
   /// [withRotation] indicates weather the icons will transite with rotation.
   /// [curve] the curve of the transition velocity.
-  /// [duration] the duration of the transition, initially set to `350 ms`
+  /// [duration] the duration of the transition, initially set to `250 ms`
   /// [textDirection] the direction of the icons.
   /// [startAnimationAfter] the duration before the initially shown icon to
   /// start transit.
@@ -45,7 +45,7 @@ class QudsAutoAnimatedCombinedIcons extends StatefulWidget {
       this.withRotation,
       this.iconSize,
       this.curve = Curves.easeIn,
-      this.duration = const Duration(milliseconds: 350),
+      this.duration = const Duration(milliseconds: 250),
       this.textDirection,
       this.startAnimationAfter = const Duration(milliseconds: 300)});
 

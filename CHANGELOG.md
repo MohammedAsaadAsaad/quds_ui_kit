@@ -22,3 +22,6 @@
 
 ## [0.0.4] - 25/05/2021
 * Added ModalBorderSheet
+
+## [0.0.4+1] - 28/05/2021
+* Some Animation Fixes

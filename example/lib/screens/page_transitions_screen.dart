@@ -54,7 +54,7 @@ class _State extends State<PageTransitionsScreen> {
                 QudsRotatePageRoute(
                     alignment: alignment,
                     builder: (c) => _SecondScreen(),
-                    duration: Duration(milliseconds: 350))),
+                    duration: Duration(milliseconds: 250))),
           ),
           SizedBox(
             width: 5,
@@ -89,7 +89,7 @@ class _State extends State<PageTransitionsScreen> {
                 context,
                 QudsFadePageRoute(
                     builder: (c) => _SecondScreen(),
-                    duration: Duration(milliseconds: 350))),
+                    duration: Duration(milliseconds: 250))),
           ),
           SizedBox(
             width: 5,
@@ -160,7 +160,7 @@ class _State extends State<PageTransitionsScreen> {
                 context,
                 QudsBlurPageRoute(
                     builder: (c) => _SecondScreen(),
-                    duration: Duration(milliseconds: 350))),
+                    duration: Duration(milliseconds: 250))),
           ),
           SizedBox(
             width: 5,
@@ -309,7 +309,7 @@ class _State extends State<PageTransitionsScreen> {
                   withZoom: _withZoom,
                   withSlide: _withSlide,
                   duration: _isFast
-                      ? const Duration(milliseconds: 350)
+                      ? const Duration(milliseconds: 250)
                       : const Duration(milliseconds: 700))),
           child: Text('To second page'))
     ];

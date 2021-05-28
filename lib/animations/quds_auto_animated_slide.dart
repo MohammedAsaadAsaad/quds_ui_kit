@@ -11,7 +11,7 @@ class QudsAutoAnimatedSlide extends StatefulWidget {
   final TextDirection? textDirection;
 
   /// [curve] the curve of the transition velocity.
-  /// [duration] the duration of the transition, initially set to `350 ms`
+  /// [duration] the duration of the transition, initially set to `250 ms`
   /// [startAnimationAfter] the duration before the initially shown icon to
   /// start transit.
   const QudsAutoAnimatedSlide(
@@ -20,7 +20,7 @@ class QudsAutoAnimatedSlide extends StatefulWidget {
       this.yOffset = 0,
       this.textDirection,
       this.curve = Curves.easeIn,
-      this.duration = const Duration(milliseconds: 350),
+      this.duration = const Duration(milliseconds: 250),
       this.startAnimationAfter = const Duration(milliseconds: 10)});
 
   @override
