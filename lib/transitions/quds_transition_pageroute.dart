@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:quds_ui_kit/transitions/slide_direction.dart';
+import 'package:quds_ui_kit/quds_ui_kit.dart';
 
 class QudsTransitionPageRoute<T> extends PageRoute<T> {
   final Widget Function(BuildContext context) builder;
@@ -8,7 +8,8 @@ class QudsTransitionPageRoute<T> extends PageRoute<T> {
   final Color transitionColor;
   final bool withFade;
   final bool withRotate;
-  final bool withScale;
+  final bool withZoom;
+  final ZoomType zoomType;
   final bool withSlide;
   final SlideDirection slideDirection;
   final Curve curve;
@@ -21,9 +22,10 @@ class QudsTransitionPageRoute<T> extends PageRoute<T> {
       this.transitionColor = Colors.black,
       this.withFade = true,
       this.withRotate = false,
-      this.withScale = false,
+      this.withZoom = false,
+      this.zoomType = ZoomType.In,
       this.withSlide = false,
-      this.curve = Curves.ease,
+      this.curve = Curves.easeInQuint,
       this.slideDirection = SlideDirection.Start,
       this.rotateAlignment = Alignment.center,
       this.scaleAlignment = Alignment.center});
@@ -47,12 +49,18 @@ class QudsTransitionPageRoute<T> extends PageRoute<T> {
         alignment: rotateAlignment,
       );
 
-    if (this.withScale)
+    if (this.withZoom)
       ch = ScaleTransition(
         alignment: this.scaleAlignment,
-        scale: CurvedAnimation(
-            curve: this.curve,
-            parent: Tween<double>(begin: 0.7, end: 1).animate(animation)),
+        scale: Tween<double>(
+                begin: this.zoomType == ZoomType.In ? 0.8 : 1.2, end: 1)
+            .animate(animation),
+
+        //  CurvedAnimation(
+        //     curve: this.curve,
+        //     parent: Tween<double>(
+        //             begin: this.zoomType == ZoomType.In ? 0.9 : 1.3, end: 1)
+        //         .animate(animation)),
         child: ch,
       );
 

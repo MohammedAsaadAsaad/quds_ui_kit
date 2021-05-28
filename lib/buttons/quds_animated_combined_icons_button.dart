@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:quds_ui_kit/animations/quds_animated_combined_icons.dart';
+import 'package:quds_ui_kit/buttons/quds_buttons.dart';
 
 /// An animated combined icons button.
 class QudsAnimatedCombinedIconsButton extends StatelessWidget {
@@ -91,21 +92,15 @@ class QudsAnimatedCombinedIconsButton extends StatelessWidget {
         child: result,
       );
 
-    return Semantics(
-      button: true,
-      enabled: onPressed != null,
-      child: InkResponse(
-        focusNode: focusNode,
-        autofocus: autofocus,
-        canRequestFocus: onPressed != null,
-        onTap: onPressed,
-        mouseCursor: mouseCursor,
-        child: result,
-        radius: max(
-          Material.defaultSplashRadius,
-          (iconSize ?? 2 + min(padding.horizontal, padding.vertical)) * 0.7,
-          // x 0.5 for diameter -> radius and + 40% overflow derived from other Material apps.
-        ),
+    return QudsRadianButton(
+      focusNode: focusNode,
+      autofocus: autofocus,
+      onPressed: onPressed,
+      mouseCursor: mouseCursor,
+      child: result,
+      radius: max(
+        Material.defaultSplashRadius,
+        (iconSize ?? 2 + min(padding.horizontal, padding.vertical)) * 0.7,
       ),
     );
   }

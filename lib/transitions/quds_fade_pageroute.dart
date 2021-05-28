@@ -6,7 +6,7 @@ class QudsFadePageRoute<T> extends QudsTransitionPageRoute<T> {
       {required Widget Function(BuildContext context) builder,
       Duration duration = const Duration(milliseconds: 350),
       Color transitionColor = Colors.black,
-      Curve curve = Curves.easeIn})
+      Curve curve = Curves.easeInQuint})
       : super(
             builder: builder,
             duration: duration,

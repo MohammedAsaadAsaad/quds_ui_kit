@@ -1,0 +1,1 @@
+enum ZoomType { In, Out }

@@ -26,7 +26,11 @@ class _State extends State<BottomDialogsScreen> {
       child: ListView(
         padding: EdgeInsets.all(10),
         // mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[..._buildBottomSheet(), ..._buildToast()],
+        children: <Widget>[
+          ..._buildBottomSheet(),
+          ..._buildBorderSheet(),
+          ..._buildToast(),
+        ],
       ),
     );
   }
@@ -34,7 +38,7 @@ class _State extends State<BottomDialogsScreen> {
   List<Widget> _buildBottomSheet() {
     return [
       Text(
-        'Bottom Sheet',
+        'Bottom Sheets',
         style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
       ),
       ElevatedButton(
@@ -43,7 +47,7 @@ class _State extends State<BottomDialogsScreen> {
               context,
               (c) => Column(
                     children: [
-                      for (int i = 0; i < 5; i++) ListTile(title: Text('Hi'))
+                      for (int i = 0; i < 3; i++) ListTile(title: Text('Hi'))
                     ],
                   ),
               titleText: 'Test Bottom Sheet')),
@@ -62,6 +66,103 @@ class _State extends State<BottomDialogsScreen> {
               )),
       Divider(),
     ];
+  }
+
+  List<Widget> _buildBorderSheet() {
+    return [
+      Text(
+        'Border Sheets',
+        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+      ),
+      Wrap(children: [
+        ElevatedButton(
+          child: Text('Default'),
+          onPressed: () => _showBorderSheet(),
+        ),
+        SizedBox(
+          width: 5,
+        ),
+        ElevatedButton(
+          child: Text('Reversed'),
+          onPressed: () => _showBorderSheet(
+              BorderSheetPosition.RespectToScreenOrientationReversed),
+        ),
+        SizedBox(
+          width: 5,
+        ),
+        ElevatedButton(
+          child: Text('Start'),
+          onPressed: () => _showBorderSheet(BorderSheetPosition.Start),
+        ),
+        SizedBox(
+          width: 5,
+        ),
+        ElevatedButton(
+          child: Text('End'),
+          onPressed: () => _showBorderSheet(BorderSheetPosition.End),
+        ),
+        SizedBox(
+          width: 5,
+        ),
+        ElevatedButton(
+          child: Text('Right'),
+          onPressed: () => _showBorderSheet(BorderSheetPosition.Right),
+        ),
+        SizedBox(
+          width: 5,
+        ),
+        ElevatedButton(
+          child: Text('Left'),
+          onPressed: () => _showBorderSheet(BorderSheetPosition.Left),
+        ),
+        SizedBox(
+          width: 5,
+        ),
+        ElevatedButton(
+          child: Text('Top'),
+          onPressed: () => _showBorderSheet(BorderSheetPosition.Top),
+        ),
+        SizedBox(
+          width: 5,
+        ),
+        ElevatedButton(
+          child: Text('Bottom'),
+          onPressed: () => _showBorderSheet(BorderSheetPosition.Bottom),
+        ),
+        SizedBox(
+          width: 5,
+        ),
+      ]),
+      SizedBox(
+        height: 5,
+      ),
+      Divider(),
+    ];
+  }
+
+  void _showBorderSheet(
+      [BorderSheetPosition sheetPosition =
+          BorderSheetPosition.RespectToScreenOrientation]) {
+    showQudsModalBorderSheet(
+        context,
+        (c) => Column(
+              children: [
+                for (int i = 0; i < 3; i++)
+                  ListTile(
+                      leading: Container(
+                          width: 30,
+                          child: QudsAutoAnimatedCombinedIcons(
+                            startIcon: Icons.add,
+                            endIcon: Icons.done,
+                          )),
+                      onTap: () => Navigator.pop(context),
+                      title: QudsAutoAnimatedSlide(child: Text('Hi')))
+              ],
+            ),
+        borderSheetPosition: sheetPosition,
+        titleText: 'Border Sheet',
+        curve: Curves.easeInQuint,
+        duration: Duration(milliseconds: 250));
   }
 
   List<Widget> _buildToast() {

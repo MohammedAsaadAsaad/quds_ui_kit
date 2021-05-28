@@ -12,10 +12,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Quds UI Kit Example',
-      theme: ThemeData(brightness: Brightness.light),
+      theme: ThemeData(brightness: Brightness.dark),
       home: SplashScreen(),
       builder: (context, child) =>
-          Directionality(textDirection: TextDirection.ltr, child: child!),
+          Directionality(textDirection: TextDirection.rtl, child: child!),
     );
   }
 }

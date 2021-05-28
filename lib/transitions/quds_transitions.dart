@@ -5,3 +5,4 @@ export 'quds_zoom_pageroute.dart';
 export 'quds_slide_pageroute.dart';
 export 'slide_direction.dart';
 export 'quds_blur_pageroute.dart';
+export 'zoom_type.dart';

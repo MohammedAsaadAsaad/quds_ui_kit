@@ -6,13 +6,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:quds_ui_kit/quds_ui_kit.dart';
 import 'bottom_dialogs_screen.dart';
-import 'collection_pagination_example.dart';
+import 'collections_screen.dart';
 import 'animations_screen.dart';
 
 class MainDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return QudsLightDrawer(
+      titleButton: IconButton(
+        icon: Icon(Icons.done),
+        onPressed: () {},
+      ),
       bottomAboutButton: Row(
         children: [
           Container(
@@ -33,7 +37,7 @@ class MainDrawer extends StatelessWidget {
         icon: Icon(Icons.share),
         onPressed: () {},
       ),
-      body: ListView(
+      body: QudsAnimatedListView(
         physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
         children: [
           ListTile(
@@ -88,14 +92,12 @@ class MainDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: Icon(CupertinoIcons.list_bullet_below_rectangle),
-            title: Text('Collection Pagination'),
+            leading: Icon(CupertinoIcons.square_list),
+            title: Text('Collections'),
             onTap: () {
               Navigator.pop(context);
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (c) => CollectionPaginationExample()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (c) => CollectionsScreen()));
             },
           ),
           ListTile(

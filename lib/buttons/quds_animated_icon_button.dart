@@ -85,21 +85,15 @@ class QudsAnimatedIconButton extends StatelessWidget {
         child: result,
       );
 
-    return Semantics(
-      button: true,
-      enabled: onPressed != null,
-      child: InkResponse(
-        focusNode: focusNode,
-        autofocus: autofocus,
-        canRequestFocus: onPressed != null,
-        onTap: onPressed,
-        mouseCursor: mouseCursor,
-        child: result,
-        radius: max(
-          Material.defaultSplashRadius,
-          (iconSize ?? 2 + min(padding.horizontal, padding.vertical)) * 0.7,
-          // x 0.5 for diameter -> radius and + 40% overflow derived from other Material apps.
-        ),
+    return QudsRadianButton(
+      child: result,
+      focusNode: focusNode,
+      autofocus: autofocus,
+      onPressed: onPressed,
+      mouseCursor: mouseCursor,
+      radius: max(
+        Material.defaultSplashRadius,
+        (iconSize ?? 2 + min(padding.horizontal, padding.vertical)) * 0.7,
       ),
     );
   }

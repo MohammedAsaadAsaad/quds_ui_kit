@@ -16,9 +16,11 @@ class _MyHomePageState extends State<MyHomePage> {
     super.initState();
   }
 
+  GlobalKey<ScaffoldState> keyScaffold = GlobalKey();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        key: keyScaffold,
         drawer: MainDrawer(),
         appBar: AppBar(
           title: Text('Quds UI Kit'),
@@ -26,19 +28,23 @@ class _MyHomePageState extends State<MyHomePage> {
         body: Container(
           child: Center(
             child: QudsAutoAnimatedBlur(
-                child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(
-                  Icons.arrow_back,
-                  size: 70,
-                ),
-                Text(
-                  'Open Side Drawer',
-                  style: TextStyle(fontSize: 24),
-                )
-              ],
-            )),
+                child: QudsScalablePressable(
+                    scaleWhenTapDown: true,
+                    scaleWhenMouseEnter: true,
+                    duration: const Duration(milliseconds: 250),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          Icons.arrow_back,
+                          size: 70,
+                        ),
+                        Text(
+                          'Open Side Drawer',
+                          style: TextStyle(fontSize: 24),
+                        )
+                      ],
+                    ))),
           ),
         ));
   }

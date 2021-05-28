@@ -4,17 +4,19 @@ import 'package:quds_ui_kit/quds_ui_kit.dart';
 class QudsZoomPageRoute<T> extends QudsTransitionPageRoute<T> {
   QudsZoomPageRoute(
       {required Widget Function(BuildContext context) builder,
-      Duration duration = const Duration(milliseconds: 200),
-      Color transitionColor = Colors.black,
+      Duration duration = const Duration(milliseconds: 300),
+      Color transitionColor = Colors.black26,
       bool withFade = true,
-      Curve curve = Curves.easeIn,
-      Alignment alignment = Alignment.center})
+      Curve curve = Curves.easeInQuint,
+      Alignment alignment = Alignment.center,
+      ZoomType zoomType = ZoomType.In})
       : super(
             builder: builder,
             duration: duration,
             transitionColor: transitionColor,
-            withScale: true,
+            withZoom: true,
             withFade: withFade,
             scaleAlignment: alignment,
-            curve: curve);
+            curve: curve,
+            zoomType: zoomType);
 }

@@ -232,8 +232,7 @@ class QudsDialog extends StatelessWidget {
 
     if (withBlur)
       body = BackdropFilter(
-          filter: new ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-          child: body);
+          filter: new ImageFilter.blur(sigmaX: 2.0, sigmaY: 2.0), child: body);
     return Container(
       alignment: this.alignment,
       padding: this.insetPadding,

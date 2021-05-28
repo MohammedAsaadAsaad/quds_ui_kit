@@ -53,6 +53,7 @@ class _State extends State<AnimationsScreen> {
         children: <Widget>[
           ..._buildAnimatedTexts(),
           ..._buildIconWithShadow(),
+          ..._buildAnimatedWidgets(),
           ..._buildAnimatedIcons()
         ],
       ),
@@ -226,6 +227,19 @@ class _State extends State<AnimationsScreen> {
         endIcon: Icons.accessibility_new,
         showStartIcon: showStartIcon,
       ),
+      Divider(),
+    ];
+  }
+
+  List<Widget> _buildAnimatedWidgets() {
+    return [
+      Text('Animated Widgets'),
+      QudsAnimatedWidgetsFlipper(
+        startChild: Text('Add'),
+        endChild: Icon(Icons.add),
+        showStartChild: showStartIcon,
+      ),
+      Divider(),
     ];
   }
 

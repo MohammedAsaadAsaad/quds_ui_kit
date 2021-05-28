@@ -8,7 +8,7 @@ class QudsRotatePageRoute<T> extends QudsTransitionPageRoute<T> {
       {required this.builder,
       Duration duration = const Duration(milliseconds: 350),
       Color transitionColor = Colors.black,
-      Curve curve = Curves.easeIn,
+      Curve curve = Curves.easeInQuint,
       Alignment alignment = Alignment.center,
       bool withFade = true})
       : super(

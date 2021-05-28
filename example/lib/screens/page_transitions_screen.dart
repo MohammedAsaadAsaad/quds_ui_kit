@@ -29,7 +29,7 @@ class _State extends State<PageTransitionsScreen> {
         children: <Widget>[
           ..._buildFade(),
           ..._buildRotate(),
-          ..._buildScale(),
+          ..._buildZoom(),
           ..._buildBlur(),
           ..._buildSlide(),
           ..._buildCombinedTransition()
@@ -54,7 +54,7 @@ class _State extends State<PageTransitionsScreen> {
                 QudsRotatePageRoute(
                     alignment: alignment,
                     builder: (c) => _SecondScreen(),
-                    duration: Duration(milliseconds: 200))),
+                    duration: Duration(milliseconds: 350))),
           ),
           SizedBox(
             width: 5,
@@ -89,7 +89,7 @@ class _State extends State<PageTransitionsScreen> {
                 context,
                 QudsFadePageRoute(
                     builder: (c) => _SecondScreen(),
-                    duration: Duration(milliseconds: 200))),
+                    duration: Duration(milliseconds: 350))),
           ),
           SizedBox(
             width: 5,
@@ -108,8 +108,8 @@ class _State extends State<PageTransitionsScreen> {
     ];
   }
 
-  List<Widget> _buildScale() {
-    Alignment alignment = Alignment.topCenter;
+  List<Widget> _buildZoom() {
+    Alignment alignment = Alignment.center;
     return [
       Text('Zoom transitions'),
       SizedBox(
@@ -118,25 +118,27 @@ class _State extends State<PageTransitionsScreen> {
       Wrap(
         children: [
           ElevatedButton(
-            child: Text('Fast'),
+            child: Text('In'),
             onPressed: () => Navigator.push(
                 context,
                 QudsZoomPageRoute(
+                    zoomType: ZoomType.In,
                     alignment: alignment,
                     builder: (c) => _SecondScreen(),
-                    duration: Duration(milliseconds: 200))),
+                    duration: Duration(milliseconds: 250))),
           ),
           SizedBox(
             width: 5,
           ),
           ElevatedButton(
-            child: Text('Slow'),
+            child: Text('Out'),
             onPressed: () => Navigator.push(
                 context,
                 QudsZoomPageRoute(
+                    zoomType: ZoomType.Out,
                     alignment: alignment,
                     builder: (c) => _SecondScreen(),
-                    duration: Duration(milliseconds: 700))),
+                    duration: Duration(milliseconds: 250))),
           )
         ],
       ),
@@ -158,7 +160,7 @@ class _State extends State<PageTransitionsScreen> {
                 context,
                 QudsBlurPageRoute(
                     builder: (c) => _SecondScreen(),
-                    duration: Duration(milliseconds: 200))),
+                    duration: Duration(milliseconds: 350))),
           ),
           SizedBox(
             width: 5,
@@ -258,7 +260,7 @@ class _State extends State<PageTransitionsScreen> {
   bool _withFade = true;
   bool _withSlide = true;
   bool _withRotate = true;
-  bool _withScale = true;
+  bool _withZoom = true;
   bool _isFast = true;
 
   List<Widget> _buildCombinedTransition() {
@@ -278,9 +280,9 @@ class _State extends State<PageTransitionsScreen> {
             onChanged: (v) => setState(() => _withRotate = v),
           ),
           QudsCheckboxWithText(
-            value: _withScale,
-            text: (_withScale ? 'With' : 'Without') + ' ' + 'Zoom',
-            onChanged: (v) => setState(() => _withScale = v),
+            value: _withZoom,
+            text: (_withZoom ? 'With' : 'Without') + ' ' + 'Zoom',
+            onChanged: (v) => setState(() => _withZoom = v),
           ),
           QudsCheckboxWithText(
             value: _withSlide,
@@ -304,7 +306,7 @@ class _State extends State<PageTransitionsScreen> {
                   builder: (c) => _SecondScreen(),
                   withFade: _withFade,
                   withRotate: _withRotate,
-                  withScale: _withScale,
+                  withZoom: _withZoom,
                   withSlide: _withSlide,
                   duration: _isFast
                       ? const Duration(milliseconds: 350)

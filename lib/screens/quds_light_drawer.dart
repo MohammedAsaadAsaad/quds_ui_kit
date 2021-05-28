@@ -3,51 +3,59 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import '../quds_ui_kit.dart';
+
 class QudsLightDrawer extends StatelessWidget {
   final Widget? titleButton;
   final Widget? bottomButton;
   final Widget? bottomAboutButton;
   final Widget? body;
-
+  final String? backButtonTooltip;
   const QudsLightDrawer(
       {Key? key,
       this.body,
       this.titleButton,
       this.bottomButton,
-      this.bottomAboutButton})
+      this.bottomAboutButton,
+      this.backButtonTooltip})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
     TextDirection direction = Directionality.of(context);
+    bool isLTR = (direction == TextDirection.ltr);
     var size = MediaQuery.of(context).size;
 
     double cornerRadius = 30;
 
-    var borderRadius =
-        BorderRadiusDirectional.only(topEnd: Radius.circular(cornerRadius));
+    var borderRadius = BorderRadius.only(
+        topLeft: isLTR ? Radius.zero : Radius.circular(cornerRadius),
+        topRight: !isLTR ? Radius.zero : Radius.circular(cornerRadius));
 
     return SafeArea(
-        child: Material(
-      borderRadius: borderRadius,
-      color: theme.primaryColor,
-      shadowColor: theme.iconTheme.color!,
-      child: Container(
-        margin: EdgeInsets.only(top: 0),
-        width: min(size.width * .8, 304),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            _buildHeader(context),
-            Expanded(
-              child: _buildBody(context, theme, direction),
-            ),
-            _buildBottom(context)
-          ],
-        ),
-      ),
-    ));
+        child: ClipRRect(
+            borderRadius: borderRadius,
+            child: Material(
+              borderOnForeground: true,
+              borderRadius: borderRadius,
+              color: theme.primaryColor,
+              shadowColor: theme.iconTheme.color!,
+              child: Container(
+                margin: EdgeInsets.only(top: 0),
+                width: min(size.width * .8, 304),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    _buildHeader(context),
+                    Expanded(
+                      child: _buildBody(context, theme, direction),
+                    ),
+                    _buildBottom(context)
+                  ],
+                ),
+              ),
+            )));
   }
 
   Widget _buildBody(
@@ -75,23 +83,20 @@ class QudsLightDrawer extends StatelessWidget {
   Widget _buildHeader(BuildContext context) {
     Widget result =
         Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-      IconButton(
-        icon: Icon(Icons.arrow_back),
-        onPressed: () => Navigator.pop(context),
-      ),
+      QudsBackIcon(tooltip: this.backButtonTooltip ?? 'Back'),
       Expanded(child: Container()),
       if (titleButton != null) titleButton!
     ]);
+    result = Container(child: result, padding: EdgeInsets.all(5));
     return _revampIconAndText(context, result);
   }
 
   Widget _buildBottom(BuildContext context) {
     Widget result = Row(children: [
-      this.bottomAboutButton ?? Container(),
-      Expanded(child: Container()),
+      Expanded(child: this.bottomAboutButton ?? Container()),
       this.bottomButton ?? Container()
     ]);
-
+    result = Container(child: result, padding: EdgeInsets.all(5));
     return _revampIconAndText(context, result);
   }
 
