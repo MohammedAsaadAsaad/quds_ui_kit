@@ -4,9 +4,9 @@ import 'package:quds_ui_kit/quds_ui_kit.dart';
 class QudsFadePageRoute<T> extends QudsTransitionPageRoute<T> {
   QudsFadePageRoute(
       {required Widget Function(BuildContext context) builder,
-      Duration duration = const Duration(milliseconds: 250),
+      Duration duration = const Duration(milliseconds: 400),
       Color transitionColor = Colors.black,
-      Curve curve = Curves.easeInQuint})
+      Curve curve = Curves.easeIn})
       : super(
             builder: builder,
             duration: duration,

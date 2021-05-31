@@ -91,10 +91,7 @@ class _State extends State<ButtonsScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           QudsAnimatedCombinedIconsButton(
-            // textDirection: TextDirection.rtl,
-            duration: Duration(milliseconds: 250),
-            curve: Curves.ease,
-            tooltip: 'Toggle',
+            // tooltip: 'Toggle',
             iconSize: 50,
             startIcon: Icons.arrow_forward,
             // startIconColor: Colors.white,
@@ -108,8 +105,6 @@ class _State extends State<ButtonsScreen> {
             textDirection: TextDirection.rtl,
             showStartIcon: showStartIcon,
             iconSize: 50,
-            duration: Duration(milliseconds: 250),
-            // startIconColor: Colors.white,
             onPressed: _toggle,
             endIconColor: Colors.yellow,
           )

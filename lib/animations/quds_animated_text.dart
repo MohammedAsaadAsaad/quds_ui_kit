@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 
 /// A widget shows a flipping text when data is changed.
 class QudsAnimatedText extends StatefulWidget {
+  /// The string to be viewed.
   final String text;
+
+  /// The duration of the transition between the old and new text.
   final Duration duration;
+
+  /// The text style of the viewed text.
   final TextStyle? style;
 
   /// [text] the text will be shown, must not be null

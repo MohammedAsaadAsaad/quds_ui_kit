@@ -19,8 +19,8 @@ class _QudsBorderModalSheet extends StatefulWidget {
       this.title,
       this.titleText,
       this.cornerRadius = 15,
-      this.curve = Curves.easeIn,
-      this.duration = const Duration(milliseconds: 250)})
+      this.curve = Curves.fastLinearToSlowEaseIn,
+      this.duration = const Duration(milliseconds: 500)})
       : super(key: key);
 
   @override
@@ -32,7 +32,8 @@ class _QudsBorderModalSheetState extends State<_QudsBorderModalSheet> {
 
   @override
   Widget build(BuildContext context) {
-    var ch = widget.builder(context);
+    Widget ch = widget.builder(context);
+
     var mediaQuery = MediaQuery.of(context);
     var portrait = mediaQuery.orientation == Orientation.portrait;
     var screenSize = mediaQuery.size;
@@ -145,8 +146,23 @@ class _QudsBorderModalSheetState extends State<_QudsBorderModalSheet> {
       if (widget.borderSheetPosition != BorderSheetPosition.Top) titleDivider
     ];
 
-    Widget result = Material(
-      elevation: 10,
+    Widget result = Column(mainAxisSize: MainAxisSize.min, children: [
+      if (headerLine == _HeaderLinePosition.Top) _buildHorizontalDivider(),
+      if (widget.borderSheetPosition != BorderSheetPosition.Top)
+        ...titleComponents,
+      ch, //Body
+      if (widget.borderSheetPosition == BorderSheetPosition.Top)
+        ...titleComponents,
+      if (headerLine == _HeaderLinePosition.Bottom) _buildHorizontalDivider(),
+    ]);
+
+    result = Scrollbar(
+        child: SingleChildScrollView(
+      child: result,
+    ));
+
+    result = Material(
+      elevation: 3,
       borderRadius: borderRadius,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -155,18 +171,7 @@ class _QudsBorderModalSheetState extends State<_QudsBorderModalSheet> {
           if ((!ltr && headerLine == _HeaderLinePosition.Right) ||
               (ltr && headerLine == _HeaderLinePosition.Left))
             _buildVerticalDivider(),
-          Expanded(
-              child: Column(mainAxisSize: MainAxisSize.min, children: [
-            if (headerLine == _HeaderLinePosition.Top)
-              _buildHorizontalDivider(),
-            if (widget.borderSheetPosition != BorderSheetPosition.Top)
-              ...titleComponents,
-            ch,
-            if (widget.borderSheetPosition == BorderSheetPosition.Top)
-              ...titleComponents,
-            if (headerLine == _HeaderLinePosition.Bottom)
-              _buildHorizontalDivider(),
-          ])),
+          Expanded(child: result),
           if ((ltr && headerLine == _HeaderLinePosition.Right) ||
               (!ltr && headerLine == _HeaderLinePosition.Left))
             _buildVerticalDivider(),
@@ -198,7 +203,7 @@ class _QudsBorderModalSheetState extends State<_QudsBorderModalSheet> {
             maxHeight: sheetMaxSize.height, maxWidth: sheetMaxSize.width),
         child: result);
 
-    return Container(
+    result = Container(
         width: double.infinity,
         height: double.infinity,
         child: SafeArea(
@@ -206,12 +211,24 @@ class _QudsBorderModalSheetState extends State<_QudsBorderModalSheet> {
             alignment: Alignment.center,
             fit: StackFit.expand,
             children: [
-              GestureDetector(
-                  onTap: () => Navigator.pop(context), child: Container()),
+              InkWell(
+                hoverColor: Colors.transparent,
+                splashColor: Colors.transparent,
+                focusColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                onTap: () => Navigator.pop(context),
+              ),
               Align(alignment: alignment, child: result),
             ],
           ),
         ));
+
+    result = Scaffold(
+      backgroundColor: Colors.transparent,
+      body: result,
+    );
+
+    return result;
   }
 
   Widget _buildHorizontalDivider() {
@@ -247,8 +264,8 @@ Future<T?> showQudsModalBorderSheet<T>(
     String? titleText,
     double cornerRadius = 15,
     Widget? title,
-    Curve curve = Curves.easeIn,
-    Duration duration = const Duration(milliseconds: 250)}) async {
+    Curve curve = Curves.fastLinearToSlowEaseIn,
+    Duration duration = const Duration(milliseconds: 500)}) async {
   return await showDialog<T>(
       context: context,
       builder: (c) => _QudsBorderModalSheet(

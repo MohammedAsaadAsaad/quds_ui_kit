@@ -31,7 +31,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: QudsScalablePressable(
                     scaleWhenTapDown: true,
                     scaleWhenMouseEnter: true,
-                    duration: const Duration(milliseconds: 250),
+                    duration: const Duration(milliseconds: 150),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [

@@ -1,21 +1,34 @@
 import 'package:flutter/material.dart';
 
+/// An animated widget with scale transition after being bressed or mouse hovered.
 class QudsScalablePressable extends StatefulWidget {
+  /// The child to be scaled.
   final Widget child;
+
+  /// The scale of the child when be pressed or mouse hovered.
   final double scale;
+
+  /// Weather to be scaled when pressed.
   final bool scaleWhenTapDown;
+
+  /// Weather to be scaled when mouse enter child region.
   final bool scaleWhenMouseEnter;
+
+  /// The duration of the transition.
   final Duration duration;
+
+  /// The curve of the transition.
   final Curve curve;
 
+  /// Create an instance of [QudsScalablePressable]
   const QudsScalablePressable(
       {Key? key,
       required this.child,
       this.scale = 1.3,
       this.scaleWhenTapDown = true,
       this.scaleWhenMouseEnter = true,
-      this.duration = const Duration(milliseconds: 200),
-      this.curve = Curves.easeIn})
+      this.duration = const Duration(milliseconds: 400),
+      this.curve = Curves.fastLinearToSlowEaseIn})
       : super(key: key);
 
   @override

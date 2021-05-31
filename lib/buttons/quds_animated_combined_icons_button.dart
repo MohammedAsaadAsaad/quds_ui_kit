@@ -36,7 +36,7 @@ class QudsAnimatedCombinedIconsButton extends StatelessWidget {
   /// if set to `false` it will show initially the endIcon.
   /// [withRotation] indicates weather the icons will transite with rotation.
   /// [curve] the curve of the transition velocity.
-  /// [duration] the duration of the transition, initially set to `250 ms`
+  /// [duration] the duration of the transition, initially set to `400 ms`
   /// [textDirection] the direction of the icons.
   /// [onPressed] called when the user press the button.
   /// [tooltip] a short message shown when the user hold a tap over the button.
@@ -54,9 +54,9 @@ class QudsAnimatedCombinedIconsButton extends StatelessWidget {
       this.focusNode,
       this.iconSize = 24,
       this.withRotation,
-      this.curve = Curves.ease,
+      this.curve = Curves.fastLinearToSlowEaseIn,
       this.padding = const EdgeInsets.all(8.0),
-      this.duration = const Duration(milliseconds: 250),
+      this.duration = const Duration(milliseconds: 400),
       this.mouseCursor = SystemMouseCursors.click,
       this.textDirection});
 

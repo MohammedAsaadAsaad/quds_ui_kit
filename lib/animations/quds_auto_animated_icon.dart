@@ -4,17 +4,34 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import '../quds_ui_kit.dart';
 
+/// An auto [AnimatedIconData] animator.
 class QudsAutoAnimatedIcon extends StatefulWidget {
+  /// The icon data of this widget.
   final AnimatedIconData iconData;
+
+  /// The color of the icon.
   final Color? color;
+
+  /// The color of the start icon.
   final Color? startIconColor;
+
+  /// The color of the end icon.
   final Color? endIconColor;
+
+  /// The size of the animated icon.
   final double? iconSize;
+
+  /// Weather to show the start icon of the end,
+  /// if set to [true], start icon will be shown, otherwise end icon will be shown.
   final bool showStartIcon;
+
+  /// The duration of the transition between start end end icons.
   final Duration duration;
-  final bool? withRotation;
-  // final Curve curve;
+
+  /// The direction of the animated icon, by default they forward the parent text direction.
   final TextDirection? textDirection;
+
+  /// The duration before the transition begin.
   final Duration startAnimationAfter;
 
   /// This widgets show animated icon with auto animation,
@@ -27,7 +44,7 @@ class QudsAutoAnimatedIcon extends StatefulWidget {
   /// and automatically transit to [endIcon].
   /// [withRotation] indicates weather the icons will transite with rotation.
   /// [curve] the curve of the transition velocity.
-  /// [duration] the duration of the transition, initially set to `250 ms`
+  /// [duration] the duration of the transition, initially set to `400 ms`
   /// [textDirection] the direction of the icons.
   /// [startAnimationAfter] the duration before the initially shown icon to
   /// start transit.
@@ -37,10 +54,8 @@ class QudsAutoAnimatedIcon extends StatefulWidget {
       this.startIconColor,
       this.endIconColor,
       this.showStartIcon = false,
-      this.withRotation,
       this.iconSize,
-      // this.curve = Curves.easeIn,
-      this.duration = const Duration(milliseconds: 250),
+      this.duration = const Duration(milliseconds: 400),
       this.textDirection,
       this.startAnimationAfter = const Duration(milliseconds: 300)});
 

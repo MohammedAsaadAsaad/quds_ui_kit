@@ -3,13 +3,29 @@ import 'package:flutter/widgets.dart';
 
 /// A wrap of flutter embedded [AnimatedIcon]s with simlpe control.
 class QudsAnimatedIcon extends StatefulWidget {
+  /// The icon data of this widget.
   final AnimatedIconData iconData;
+
+  /// The color of the icon.
   final Color? color;
+
+  /// The color of the start icon.
   final Color? startIconColor;
+
+  /// The color of the end icon.
   final Color? endIconColor;
+
+  /// The size of the animated icon.
   final double? iconSize;
+
+  /// Weather to show the start icon of the end,
+  /// if set to [true], start icon will be shown, otherwise end icon will be shown.
   final bool showStartIcon;
+
+  /// The duration of the transition between start end end icons.
   final Duration duration;
+
+  /// The direction of the animated icon, by default they forward the parent text direction.
   final TextDirection? textDirection;
 
   /// [iconData] the [AnimatedIconData] will be shown in this widget.

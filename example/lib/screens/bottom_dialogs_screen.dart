@@ -147,7 +147,7 @@ class _State extends State<BottomDialogsScreen> {
         context,
         (c) => Column(
               children: [
-                for (int i = 0; i < 3; i++)
+                for (int i = 0; i < 4; i++)
                   ListTile(
                       leading: Container(
                           width: 30,
@@ -161,8 +161,8 @@ class _State extends State<BottomDialogsScreen> {
             ),
         borderSheetPosition: sheetPosition,
         titleText: 'Border Sheet',
-        curve: Curves.easeInQuint,
-        duration: Duration(milliseconds: 250));
+        curve: Curves.fastLinearToSlowEaseIn,
+        duration: const Duration(milliseconds: 450));
   }
 
   List<Widget> _buildToast() {

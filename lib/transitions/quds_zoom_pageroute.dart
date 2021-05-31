@@ -7,7 +7,7 @@ class QudsZoomPageRoute<T> extends QudsTransitionPageRoute<T> {
       Duration duration = const Duration(milliseconds: 300),
       Color transitionColor = Colors.black26,
       bool withFade = true,
-      Curve curve = Curves.easeInQuint,
+      Curve curve = Curves.easeInOut,
       Alignment alignment = Alignment.center,
       ZoomType zoomType = ZoomType.In})
       : super(

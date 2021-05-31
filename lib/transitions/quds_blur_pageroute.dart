@@ -11,9 +11,9 @@ class QudsBlurPageRoute<T> extends PageRoute<T> {
 
   QudsBlurPageRoute({
     required this.builder,
-    this.duration = const Duration(milliseconds: 250),
+    this.duration = const Duration(milliseconds: 400),
     this.transitionColor = Colors.transparent,
-    this.curve = Curves.easeInQuint,
+    this.curve = Curves.fastOutSlowIn,
     this.initialBlurRadius = 100,
   });
   @override

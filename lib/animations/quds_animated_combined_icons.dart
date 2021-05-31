@@ -6,16 +6,38 @@ import 'package:flutter/widgets.dart';
 /// transition from the first to the second and reverse this transition.
 /// It applies rotation with fade effect within icons transition.
 class QudsAnimatedCombinedIcons extends StatelessWidget {
+  /// The start Icon of this widget
   final IconData startIcon;
+
+  /// The end Icon of this widget
   final IconData endIcon;
+
+  /// The default color of the two icons [startIcon], [endIcon]
   final Color? color;
+
+  /// The color of the startIcon, if [startIconColor] will be set to the start color, otherwise [color] will be set.
   final Color? startIconColor;
+
+  /// The color of the endIcon, if [endIconColor] will be set to the end color, otherwise [color] will be set.
   final Color? endIconColor;
+
+  /// The size of the two icons [startIcon], [endIcon]
   final double? iconSize;
+
+  /// Weather to show [startIcon] or [endIcon],
+  /// if set to [true] [startIcon] will be shown, otherwise [endIcon] will be shown
   final bool showStartIcon;
+
+  /// The duration of transition between the two icons [startIcon] or [endIcon].
   final Duration duration;
+
+  /// Weather the transition between will be performed with rotation
   final bool? withRotation;
+
+  /// The curve of the transition
   final Curve curve;
+
+  /// The direction of the two icons, by default they forward the parent text direction.
   final TextDirection? textDirection;
 
   /// This widgets consists of [startIcon] & [endIcon],
@@ -26,7 +48,7 @@ class QudsAnimatedCombinedIcons extends StatelessWidget {
   /// if set to `false` it will show initially the endIcon.
   /// [withRotation] indicates weather the icons will transite with rotation.
   /// [curve] the curve of the transition velocity.
-  /// [duration] the duration of the transition, initially set to `250 ms`
+  /// [duration] the duration of the transition, initially set to `400 ms`
   /// [textDirection] the direction of the icons.
   const QudsAnimatedCombinedIcons({
     required this.startIcon,
@@ -37,8 +59,8 @@ class QudsAnimatedCombinedIcons extends StatelessWidget {
     this.iconSize,
     this.showStartIcon = true,
     this.withRotation,
-    this.curve = Curves.easeIn,
-    this.duration = const Duration(milliseconds: 250),
+    this.curve = Curves.easeInCubic,
+    this.duration = const Duration(milliseconds: 400),
     this.textDirection,
   });
 

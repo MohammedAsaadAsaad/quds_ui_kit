@@ -32,7 +32,7 @@ class QudsAnimatedIconButton extends StatelessWidget {
   /// [iconSize] is the size of the two icons.
   /// [showStartIcon] if is `true` the widget will show initially the startIcon,
   /// if set to `false` it will show initially the endIcon.
-  /// [duration] the duration of the transition, initially set to `250 ms`
+  /// [duration] the duration of the transition, initially set to `400 ms`
   /// [textDirection] the direction of the icons.
   /// [textDirection] the direction of the icons.
   /// [onPressed] called when the user press the button.
@@ -50,9 +50,9 @@ class QudsAnimatedIconButton extends StatelessWidget {
       this.focusNode,
       this.iconSize = 24,
       this.withRotation,
-      this.curve = Curves.ease,
+      this.curve = Curves.fastLinearToSlowEaseIn,
       this.padding = const EdgeInsets.all(8.0),
-      this.duration = const Duration(milliseconds: 250),
+      this.duration = const Duration(milliseconds: 400),
       this.mouseCursor = SystemMouseCursors.click,
       this.textDirection});
 

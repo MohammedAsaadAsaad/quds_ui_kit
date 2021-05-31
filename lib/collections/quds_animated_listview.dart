@@ -8,7 +8,7 @@ class QudsAnimatedListView extends ListView {
       EdgeInsets? padding,
       bool keepChildrenAlive = true,
       SlideDirection slideDirection = SlideDirection.Start,
-      Curve curve = Curves.bounceIn,
+      Curve curve = Curves.bounceOut,
       Duration duration = const Duration(milliseconds: 500)})
       : super(children: [
           if (children != null)
@@ -71,10 +71,6 @@ class _QudsAnimatedListTileState extends State<_QudsAnimatedListTile>
         break;
     }
     return QudsAutoAnimatedSlide(
-        textDirection: [SlideDirection.Start, SlideDirection.End]
-                .contains(widget.slideDirection)
-            ? Directionality.of(context)
-            : null,
         xOffset: initialOffset.dx,
         yOffset: initialOffset.dy,
         curve: widget.curve,

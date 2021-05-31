@@ -25,3 +25,18 @@
 
 ## [0.0.4+1] - 28/05/2021
 * Some Animation Fixes
+
+## [0.0.4+2] - 28/05/2021
+* Fixed Border Sheet Scrolling
+
+## [0.0.4+3] - 29/05/2021
+* Fixed Border Sheet Slide effect
+
+## [0.0.4+4] - 29/05/2021
+* Fixed transitions
+
+## [0.0.4+5] - 29/05/2021
+* Fixed border sheet with bottom keyboard
+
+## [0.0.4+6] - 29/05/2021
+* Added some documentations.

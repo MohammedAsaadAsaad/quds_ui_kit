@@ -121,9 +121,6 @@ class _State extends State<AnimationsScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           QudsAnimatedCombinedIcons(
-            // textDirection: TextDirection.rtl,
-            duration: Duration(milliseconds: 250),
-            curve: Curves.ease,
             iconSize: 50,
             startIcon: Icons.arrow_forward,
             // startIconColor: Colors.white,

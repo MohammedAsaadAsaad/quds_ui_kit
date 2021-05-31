@@ -18,14 +18,14 @@ class QudsTransitionPageRoute<T> extends PageRoute<T> {
 
   QudsTransitionPageRoute(
       {required this.builder,
-      this.duration = const Duration(milliseconds: 250),
+      this.duration = const Duration(milliseconds: 400),
       this.transitionColor = Colors.black,
       this.withFade = true,
       this.withRotate = false,
       this.withZoom = false,
       this.zoomType = ZoomType.In,
       this.withSlide = false,
-      this.curve = Curves.easeInQuint,
+      this.curve = Curves.fastLinearToSlowEaseIn,
       this.slideDirection = SlideDirection.Start,
       this.rotateAlignment = Alignment.center,
       this.scaleAlignment = Alignment.center});

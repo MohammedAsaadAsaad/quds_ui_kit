@@ -2,33 +2,46 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+/// An animated flipper between two widgets with fade and rotation transitions.
 class QudsAnimatedWidgetsFlipper extends StatelessWidget {
+  /// The start child.
   final Widget startChild;
+
+  /// The end child.
   final Widget endChild;
+
+  /// Weather to show the start child.
+  /// If set to [true], [startChild] will be shown, otherwise [endChild] will be.
   final bool showStartChild;
+
+  /// The duration of the transition between the two children [startChild] and [endChild]
   final Duration duration;
+
+  /// Weather the transition consists of rotation.
   final bool? withRotation;
+
+  /// The curve of the transition.
   final Curve curve;
 
   /// [showStartChild] if is `true` the widget will show initially the startChild,
   /// if set to `false` it will show initially the endChild.
   /// [withRotation] indicates weather the icons will transite with rotation.
   /// [curve] the curve of the transition velocity.
-  /// [duration] the duration of the transition, initially set to `250 ms`
+  /// [duration] the duration of the transition, initially set to `400 ms`
   const QudsAnimatedWidgetsFlipper({
     required this.startChild,
     required this.endChild,
     this.showStartChild = true,
     this.withRotation,
-    this.curve = Curves.easeIn,
-    this.duration = const Duration(milliseconds: 250),
+    this.curve = Curves.fastLinearToSlowEaseIn,
+    this.duration = const Duration(milliseconds: 400),
   });
 
   @override
   Widget build(BuildContext context) {
     return TweenAnimationBuilder<double>(
       duration: duration,
-      curve: Curves.ease,
+      curve: this.curve,
       tween: Tween<double>(
           begin: showStartChild ? 1 : 0, end: !showStartChild ? 0 : 1),
       builder: (c, v, _) {

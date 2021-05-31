@@ -3,9 +3,16 @@ import 'quds_animated_text.dart';
 
 /// An animating counter, flips automatically when change the number.
 class QudsAnimatedCounter extends StatelessWidget {
+  /// The current number to be shown.
   final int number;
+
+  /// The length of the viewed number, if it digit less than [length], some zeros will be added.
   final int? length;
+
+  /// The text style of the viewed number.
   final TextStyle? style;
+
+  /// The duration of new numbers transition
   final Duration duration;
 
   /// [number] the number will be shown in this counter, must be non-negative.

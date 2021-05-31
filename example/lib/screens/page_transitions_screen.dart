@@ -88,8 +88,8 @@ class _State extends State<PageTransitionsScreen> {
             onPressed: () => Navigator.push(
                 context,
                 QudsFadePageRoute(
-                    builder: (c) => _SecondScreen(),
-                    duration: Duration(milliseconds: 250))),
+                  builder: (c) => _SecondScreen(),
+                )),
           ),
           SizedBox(
             width: 5,
@@ -100,7 +100,7 @@ class _State extends State<PageTransitionsScreen> {
                 context,
                 QudsFadePageRoute(
                     builder: (c) => _SecondScreen(),
-                    duration: Duration(milliseconds: 700))),
+                    duration: Duration(milliseconds: 1000))),
           )
         ],
       ),
@@ -122,10 +122,10 @@ class _State extends State<PageTransitionsScreen> {
             onPressed: () => Navigator.push(
                 context,
                 QudsZoomPageRoute(
-                    zoomType: ZoomType.In,
-                    alignment: alignment,
-                    builder: (c) => _SecondScreen(),
-                    duration: Duration(milliseconds: 250))),
+                  zoomType: ZoomType.In,
+                  alignment: alignment,
+                  builder: (c) => _SecondScreen(),
+                )),
           ),
           SizedBox(
             width: 5,
@@ -135,10 +135,10 @@ class _State extends State<PageTransitionsScreen> {
             onPressed: () => Navigator.push(
                 context,
                 QudsZoomPageRoute(
-                    zoomType: ZoomType.Out,
-                    alignment: alignment,
-                    builder: (c) => _SecondScreen(),
-                    duration: Duration(milliseconds: 250))),
+                  zoomType: ZoomType.Out,
+                  alignment: alignment,
+                  builder: (c) => _SecondScreen(),
+                )),
           )
         ],
       ),
@@ -159,8 +159,8 @@ class _State extends State<PageTransitionsScreen> {
             onPressed: () => Navigator.push(
                 context,
                 QudsBlurPageRoute(
-                    builder: (c) => _SecondScreen(),
-                    duration: Duration(milliseconds: 250))),
+                  builder: (c) => _SecondScreen(),
+                )),
           ),
           SizedBox(
             width: 5,
@@ -171,7 +171,7 @@ class _State extends State<PageTransitionsScreen> {
                 context,
                 QudsBlurPageRoute(
                     builder: (c) => _SecondScreen(),
-                    duration: Duration(milliseconds: 700))),
+                    duration: Duration(milliseconds: 1000))),
           )
         ],
       ),

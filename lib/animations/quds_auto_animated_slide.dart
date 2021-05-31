@@ -1,14 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+/// An auto animated widget with slide effect.
 class QudsAutoAnimatedSlide extends StatefulWidget {
+  /// The child of this widget
   final Widget child;
+
+  /// The duration of the transition
   final Duration duration;
+
+  /// The curve of the transition
   final Curve curve;
+
+  /// The duration before the transition begin.
   final Duration startAnimationAfter;
+
+  /// The initial x offset.
   final double xOffset;
+
+  /// The initial y offset.
   final double yOffset;
-  final TextDirection? textDirection;
 
   /// [curve] the curve of the transition velocity.
   /// [duration] the duration of the transition, initially set to `250 ms`
@@ -18,9 +29,8 @@ class QudsAutoAnimatedSlide extends StatefulWidget {
       {required this.child,
       this.xOffset = 0.7,
       this.yOffset = 0,
-      this.textDirection,
-      this.curve = Curves.easeIn,
-      this.duration = const Duration(milliseconds: 250),
+      this.curve = Curves.fastLinearToSlowEaseIn,
+      this.duration = const Duration(milliseconds: 400),
       this.startAnimationAfter = const Duration(milliseconds: 10)});
 
   @override
