@@ -44,3 +44,7 @@
 ## [0.0.5]
 * Added some documentations.
 * Fixed transitions
+
+## [0.0.6]
+* Added some documentations.
+* Fixed transitions
