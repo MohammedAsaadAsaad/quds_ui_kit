@@ -2,17 +2,38 @@ import 'package:flutter/material.dart';
 import '../quds_ui_kit.dart';
 
 class QudsDigitalTimeViewer extends StatelessWidget {
-  final int? hour;
-  final int? minute;
-  final int? second;
-  final int? milliSecond;
-  final TextStyle style;
+  /// Weather to show in 24 format.
   final bool format24;
+
+  /// Weather to show day time period `AM` - `PM`.
   final bool showTimePeriod;
-  final TextStyle timePerionStyle;
+
+  /// The text style of the digits.
+  final TextStyle style;
+
+  /// The text style of time period text `AM` - `PM`.
+  final TextStyle timePeriodStyle;
+
+  /// AM text, default: `AM`
   final String amText;
+
+  /// PM text, default: `PM`
   final String pmText;
+
+  /// The digits boxes color.
   final Color? backgroundColor;
+
+  /// The hour component value, if set to [null], will not be shown.
+  final int? hour;
+
+  /// The minute component value, if set to [null], will not be shown.
+  final int? minute;
+
+  /// The second component value, if set to [null], will not be shown.
+  final int? second;
+
+  /// The millisecond component value, if set to [null], will not be shown.
+  final int? milliSecond;
 
   const QudsDigitalTimeViewer(
       {Key? key,
@@ -24,7 +45,7 @@ class QudsDigitalTimeViewer extends StatelessWidget {
       this.showTimePeriod = true,
       this.amText = 'AM',
       this.pmText = 'PM',
-      this.timePerionStyle = const TextStyle(fontSize: 24),
+      this.timePeriodStyle = const TextStyle(fontSize: 24),
       this.style =
           const TextStyle(fontSize: 24, letterSpacing: 3, color: Colors.white),
       this.backgroundColor})
@@ -46,7 +67,7 @@ class QudsDigitalTimeViewer extends StatelessWidget {
           if (hour != null && showTimePeriod) ...[
             QudsAnimatedText(
               isMorning ? amText : pmText,
-              style: timePerionStyle,
+              style: timePeriodStyle,
             ),
             SizedBox(
               width: 5,

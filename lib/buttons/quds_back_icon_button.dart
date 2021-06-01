@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import '../quds_ui_kit.dart';
 
-class QudsBackIcon extends StatelessWidget {
-  final String tooltip;
+/// An animated back iconButton.
+class QudsBackIconButton extends StatelessWidget {
+  /// The tooltip message of this button.
+  final String? tooltip;
 
-  const QudsBackIcon({Key? key, this.tooltip = 'Back'}) : super(key: key);
+  /// Create an instance of [QudsBackIconButton]
+  const QudsBackIconButton({Key? key, this.tooltip}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return QudsRadianButton(
-      tooltip: this.tooltip,
+      tooltip:
+          this.tooltip ?? MaterialLocalizations.of(context).backButtonTooltip,
       child: Padding(
           padding: EdgeInsets.all(7),
           child: QudsAutoAnimatedCombinedIcons(

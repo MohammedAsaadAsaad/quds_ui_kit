@@ -2,28 +2,56 @@ import 'package:flutter/material.dart';
 
 /// A widget that show list of items with pagining.
 class QudsCollectionPagination<T> extends StatelessWidget {
+  /// The current selected page.
   final int selectedPage;
+
+  /// The count of all items.
   final int total;
+
+  /// Desired results count in each page.
   final int resultsPerPage;
+
+  /// The current page items.
   final List<T> currentPageItems;
+
+  /// The builder of each child.
   final Widget Function(
     BuildContext context,
     int index,
     T obj,
   ) itemBuilder;
+
+  /// The divider builder.
   final Widget Function(
     BuildContext context,
     int index,
   )? dividerBuilder;
+
+  /// Called when the current page change.
   final Function(int page) onPageChanged;
+
+  /// Called when the current results per page changed.
   final Function(int resultsPerPage)? onResultsPerPageChanged;
+
+  /// The desired page items counts like `[ 5 , 10 , 20 ]`
   final List<int> pageItemLengths;
+
+  /// Text of 'Results' label.
   final String resultsText;
+
+  /// Text of 'Of' label.
   final String ofText;
+
+  /// Text of 'Results per page' label.
   final String resultsPerPageText;
+
+  /// The items cross axis alignment.
   final CrossAxisAlignment crossAxisAlignment;
+
+  /// The items listview padding.
   final EdgeInsets? itemsPadding;
 
+  /// Create an instance of [QudsCollectionPagination].
   QudsCollectionPagination(
       {required this.selectedPage,
       required this.currentPageItems,
@@ -75,8 +103,8 @@ class QudsCollectionPagination<T> extends StatelessWidget {
               padding: EdgeInsets.only(bottom: 10),
               child: Column(
                 children: <Widget>[
-                  buildPagesControls(context),
-                  buildResultsStatistics(context),
+                  _buildPagesControls(context),
+                  _buildResultsStatistics(context),
                 ],
               ),
             ),
@@ -90,21 +118,22 @@ class QudsCollectionPagination<T> extends StatelessWidget {
                 padding: EdgeInsets.only(bottom: 10),
                 child: Row(
                   children: <Widget>[
-                    buildPagesControls(context),
-                    buildResultsStatistics(context),
+                    _buildPagesControls(context),
+                    _buildResultsStatistics(context),
                   ],
                 ),
               ),
             ));
   }
 
-  int get totalPages {
+  /// Get the number of all pages.
+  int get _totalPages {
     var result = total ~/ resultsPerPage;
     if (result * resultsPerPage < total) result += 1;
     return result;
   }
 
-  Widget buildPagesControls(BuildContext context) {
+  Widget _buildPagesControls(BuildContext context) {
     var isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
 
     if (total == 0) return Container();
@@ -112,12 +141,12 @@ class QudsCollectionPagination<T> extends StatelessWidget {
     List<int> pages = [];
 
     var addPage = (int i) {
-      if (pages.length < 5 && !pages.contains(i) && i > 0 && i <= totalPages)
+      if (pages.length < 5 && !pages.contains(i) && i > 0 && i <= _totalPages)
         pages.add(i);
     };
 
     addPage(1);
-    addPage(totalPages);
+    addPage(_totalPages);
     addPage(selectedPage);
     addPage(selectedPage - 1);
     addPage(selectedPage + 1);
@@ -131,13 +160,13 @@ class QudsCollectionPagination<T> extends StatelessWidget {
     List<Widget> widgetNums = [];
     for (int i = 0; i < pages.length; i++) {
       if (i == 0)
-        widgetNums.add(buildNumButton(pages[i], context));
+        widgetNums.add(_buildNumButton(pages[i], context));
       else {
         if (pages[i - 1] != pages[i] - 1) {
-          widgetNums.add(buildNumButton(null, context));
-          widgetNums.add(buildNumButton(pages[i], context));
+          widgetNums.add(_buildNumButton(null, context));
+          widgetNums.add(_buildNumButton(pages[i], context));
         } else
-          widgetNums.add(buildNumButton(pages[i], context));
+          widgetNums.add(_buildNumButton(pages[i], context));
       }
     }
     for (int i = 1; i <= pages.length; i++) {}
@@ -160,7 +189,7 @@ class QudsCollectionPagination<T> extends StatelessWidget {
           );
   }
 
-  Widget buildNumButton(int? i, BuildContext context) {
+  Widget _buildNumButton(int? i, BuildContext context) {
     var style = Theme.of(context).textTheme.bodyText1!;
     var border = BorderRadius.circular(3);
     return Container(
@@ -183,7 +212,7 @@ class QudsCollectionPagination<T> extends StatelessWidget {
     );
   }
 
-  Widget buildResultsStatistics(BuildContext context) {
+  Widget _buildResultsStatistics(BuildContext context) {
     var isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
     var style = TextStyle(fontSize: 18);
 
@@ -275,7 +304,7 @@ class QudsCollectionPagination<T> extends StatelessWidget {
               if (dividerBuilder != null)
                 dividerBuilder!(context, i)
               else
-                Divider(
+                const Divider(
                   height: 1,
                 )
           ]

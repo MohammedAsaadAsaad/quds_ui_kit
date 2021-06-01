@@ -1,7 +1,9 @@
 import 'package:flutter/widgets.dart';
 import 'package:quds_ui_kit/quds_ui_kit.dart';
 
+/// An animated list view with ability to customize the children animation.
 class QudsAnimatedListView extends ListView {
+  /// Create an instance of [QudsAnimatedListView].
   QudsAnimatedListView(
       {List<Widget>? children,
       ScrollPhysics? physics,

@@ -6,21 +6,50 @@ import '../quds_ui_kit.dart';
 
 //A flutter animated icon button
 class QudsAnimatedIconButton extends StatelessWidget {
+  /// The icon data of this widget.
   final AnimatedIconData iconData;
+
+  /// The color of the icon.
   final Color? color;
+
+  /// The color of the start icon.
   final Color? startIconColor;
+
+  /// The color of the end icon.
   final Color? endIconColor;
+
+  /// The size of the animated icon.
   final double? iconSize;
+
+  /// Weather to show the start icon of the end,
+  /// if set to [true], start icon will be shown, otherwise end icon will be shown.
   final bool showStartIcon;
+
+  /// The duration of the transition between start end end icons.
   final Duration duration;
+
+  /// Called when user press this button.
   final VoidCallback? onPressed;
+
+  /// The padding of this widget.
   final EdgeInsets padding;
+
+  /// The tooltip message of this button.
   final String? tooltip;
+
+  /// The focus node of this button.
   final FocusNode? focusNode;
 
+  /// Weather this button occupies the focus automatically.
   final bool autofocus;
+
+  /// Weather the transition between will be performed with rotation
   final bool? withRotation;
+
+  /// The curve of the transition
   final Curve curve;
+
+  /// The direction of the two icons, by default they forward the parent text direction.
   final TextDirection? textDirection;
 
   /// Defaults to [SystemMouseCursors.click].

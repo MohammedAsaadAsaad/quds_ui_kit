@@ -1,13 +1,26 @@
 import 'package:flutter/material.dart';
 
+/// Icon with shadow.
 class QudsIconWithShadow extends StatelessWidget {
+  /// The icon data of this widget.
   final IconData iconData;
+
+  /// The color of the icon.
   final Color? color;
+
+  /// The color of the icon shadow.
   final Color? shadowColor;
+
+  /// The offset of the shadow.
   final Offset? offset;
+
+  /// The size of the icon.
   final double? size;
+
+  /// The text direction of the icon.
   final TextDirection? textDirection;
 
+  /// Create an instance of [QudsIconWithShadow].
   const QudsIconWithShadow(
       {Key? key,
       required this.iconData,

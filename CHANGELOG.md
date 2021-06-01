@@ -40,3 +40,7 @@
 
 ## [0.0.4+6] - 29/05/2021
 * Added some documentations.
+
+## [0.0.5]
+* Added some documentations.
+* Fixed transitions

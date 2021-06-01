@@ -5,20 +5,28 @@ import 'package:flutter/material.dart';
 
 import '../quds_ui_kit.dart';
 
+/// A drawer with simple design.
 class QudsLightDrawer extends StatelessWidget {
+  /// The title button of this drawer.
   final Widget? titleButton;
+
+  /// The bottom button of this drawer.
   final Widget? bottomButton;
+
+  /// The bottom about button of this drawer.
   final Widget? bottomAboutButton;
+
+  /// The body of this drawer.
   final Widget? body;
-  final String? backButtonTooltip;
-  const QudsLightDrawer(
-      {Key? key,
-      this.body,
-      this.titleButton,
-      this.bottomButton,
-      this.bottomAboutButton,
-      this.backButtonTooltip})
-      : super(key: key);
+
+  /// Create an instance of [QudsLightDrawer]
+  const QudsLightDrawer({
+    Key? key,
+    this.body,
+    this.titleButton,
+    this.bottomButton,
+    this.bottomAboutButton,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +91,7 @@ class QudsLightDrawer extends StatelessWidget {
   Widget _buildHeader(BuildContext context) {
     Widget result =
         Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-      QudsBackIcon(tooltip: this.backButtonTooltip ?? 'Back'),
+      QudsBackIconButton(),
       Expanded(child: Container()),
       if (titleButton != null) titleButton!
     ]);

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:quds_ui_kit/animations/quds_animations.dart';
 
+/// Show confirmation delete dialog with two actions `Delete` - `Cancel`.
 Future<void> showQudsConfirmDeleteDialog(BuildContext context,
     {Widget? child = const Text('Are you sure to delete?'),
     Widget Function(BuildContext context)? builder,
@@ -38,6 +39,7 @@ Future<void> showQudsConfirmDeleteDialog(BuildContext context,
       noText: cancelText);
 }
 
+/// Show confirmation exit dialog with two actions `Exit` - `Cancel`.
 Future<void> showQudsConfirmExitDialog(BuildContext context,
     {Widget? child = const Text('Are you sure to exit?'),
     Widget Function(BuildContext context)? builder,
@@ -71,6 +73,7 @@ Future<void> showQudsConfirmExitDialog(BuildContext context,
       noText: cancelText);
 }
 
+/// Show two actions dialog with  `Yes` - `No`.
 Future<void> showQudsYesNoDialog(BuildContext context,
     {Widget? child,
     Widget Function(BuildContext context)? builder,
@@ -124,6 +127,7 @@ Future<void> showQudsYesNoDialog(BuildContext context,
   }
 }
 
+/// Show a dialog with already defined components like title, body, bottom actions, leading icon.
 Future<T?> showQudsDialog<T>(BuildContext context,
     {Widget? child,
     Widget Function(BuildContext context)? builder,
@@ -158,17 +162,36 @@ const EdgeInsets _defaultDialogInsetPadding =
     const EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0);
 final BorderRadius _defaultDialogBorderRadius = BorderRadius.circular(4);
 
+/// Represents a dialog with already defined components like title, body, bottom actions, leading icon.
 class QudsDialog extends StatelessWidget {
+  /// The padding of all of this dialog components.
   final EdgeInsets insetPadding;
+
+  /// The body of this dialog.
   final Widget? child;
+
+  /// The bottom actions of this dialog.
   final List<Widget>? actions;
+
+  /// The top leading actions of this dialog.
   final List<Widget>? leadingActions;
+
+  /// The title widget of this dialog.
   final Widget? title;
+
+  /// The alignment of this dialog according to the whole screen.
   final AlignmentGeometry alignment;
+
+  /// The border radius of this dialog.
   final BorderRadius? borderRadis;
+
+  /// The background color of this dialog.
   final Color? backgroundColor;
+
+  /// Weather this dialog shows with background blured.
   final bool withBlur;
 
+  /// Create an instance of [QudsDialog]
   const QudsDialog(
       {Key? key,
       this.child,

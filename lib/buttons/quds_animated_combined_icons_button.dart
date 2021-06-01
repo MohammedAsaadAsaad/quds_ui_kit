@@ -8,21 +8,53 @@ import 'package:quds_ui_kit/buttons/quds_buttons.dart';
 
 /// An animated combined icons button.
 class QudsAnimatedCombinedIconsButton extends StatelessWidget {
+  /// The start Icon of this widget
   final IconData startIcon;
+
+  /// The end Icon of this widget
   final IconData endIcon;
+
+  /// The default color of the two icons [startIcon], [endIcon]
   final Color? color;
+
+  /// The color of the startIcon, if [startIconColor] will be set to the start color, otherwise [color] will be set.
   final Color? startIconColor;
+
+  /// The color of the endIcon, if [endIconColor] will be set to the end color, otherwise [color] will be set.
   final Color? endIconColor;
+
+  /// The size of the two icons [startIcon], [endIcon]
   final double? iconSize;
+
+  /// Weather to show [startIcon] or [endIcon],
+  /// if set to [true] [startIcon] will be shown, otherwise [endIcon] will be shown
   final bool showStartIcon;
+
+  /// The duration of transition between the two icons [startIcon] or [endIcon].
   final Duration duration;
+
+  /// Called when user press this button.
   final VoidCallback? onPressed;
+
+  /// The padding of this widget.
   final EdgeInsets padding;
+
+  /// The tooltip message of this button.
   final String? tooltip;
+
+  /// The focus node of this button.
   final FocusNode? focusNode;
+
+  /// Weather this button occupies the focus automatically.
   final bool autofocus;
+
+  /// Weather the transition between will be performed with rotation
   final bool? withRotation;
+
+  /// The curve of the transition
   final Curve curve;
+
+  /// The direction of the two icons, by default they forward the parent text direction.
   final TextDirection? textDirection;
 
   /// Defaults to [SystemMouseCursors.click].

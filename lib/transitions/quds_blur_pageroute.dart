@@ -2,13 +2,24 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:quds_ui_kit/animations/quds_animations.dart';
 
+/// A page route with blur transition.
 class QudsBlurPageRoute<T> extends PageRoute<T> {
+  /// The builder of the next page.
   final Widget Function(BuildContext context) builder;
+
+  /// The duration of transition.
   final Duration duration;
+
+  /// The barrier color of the transition.
   final Color transitionColor;
+
+  /// The curve of transition.
   final Curve curve;
+
+  /// The initial blur radius.
   final double initialBlurRadius;
 
+  /// Create an instance of [QudsBlurPageRoute].
   QudsBlurPageRoute({
     required this.builder,
     this.duration = const Duration(milliseconds: 400),

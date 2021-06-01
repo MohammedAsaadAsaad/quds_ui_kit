@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// Show modal bottom sheet with buatiful container.
 Future<T?> showQudsModalBottomSheet<T>(
         BuildContext context, Widget Function(BuildContext context) builder,
         {EdgeInsets? contentPadding, String? titleText, Widget? title}) async =>

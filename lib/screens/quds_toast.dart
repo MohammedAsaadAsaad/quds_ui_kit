@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+/// Show customizable buatiful toast.
 Future showQudsToast(BuildContext context,
     {MainAxisAlignment alignment = MainAxisAlignment.center,
     Widget? content,
@@ -76,16 +77,32 @@ Duration? _getToastDuration(QudsToastTime? t) {
   if (t == null) return null;
   switch (t) {
     case QudsToastTime.VeryShort:
-      return Duration(milliseconds: 1000);
+      return const Duration(milliseconds: 1000);
     case QudsToastTime.Short:
-      return Duration(milliseconds: 2000);
+      return const Duration(milliseconds: 2000);
     case QudsToastTime.Normal:
-      return Duration(milliseconds: 3000);
+      return const Duration(milliseconds: 3000);
     case QudsToastTime.Long:
-      return Duration(milliseconds: 4000);
+      return const Duration(milliseconds: 4000);
     case QudsToastTime.VeryLong:
-      return Duration(milliseconds: 5000);
+      return const Duration(milliseconds: 5000);
   }
 }
 
-enum QudsToastTime { VeryShort, Short, Normal, Long, VeryLong }
+/// The toast period to show.
+enum QudsToastTime {
+  /// About 1 second.
+  VeryShort,
+
+  /// About 2 seconds.
+  Short,
+
+  /// About 3 seconds.
+  Normal,
+
+  /// About 4 seconds.
+  Long,
+
+  /// About 5 seconds.
+  VeryLong
+}

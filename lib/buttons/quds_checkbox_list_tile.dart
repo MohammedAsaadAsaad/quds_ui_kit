@@ -4,16 +4,37 @@ import '../quds_ui_kit.dart';
 
 /// A listtile with a checkbox
 class QudsCheckboxListTile extends StatelessWidget {
+  /// The title widget of this list tile
   final Widget? title;
+
+  /// The position of the checkbox of this list tile.
   final ListTileControlAffinity controlAffinity;
+
+  /// The value of the checkbox of this list tile.
   final bool value;
+
+  /// Called when this checkbox value changes.
   final Function(bool newValue)? onChanged;
+
+  /// The size of the checkbox.
   final double? size;
+
+  /// The color of the checkbox when checked.
   final Color? checkColor;
+
+  /// The color of the checkbox when unchecked.
   final Color? unCkeckColor;
+
+  /// The tooltip message of this listtile
   final String? tooltip;
+
+  /// The text direction of the checkbox
   final TextDirection? textDirection;
+
+  /// The secondary widget of this listtile.
   final Widget? secondary;
+
+  /// Weather if the listtile has three lines.
   final bool isThreeLine;
 
   /// [value] the check state of this checkbox

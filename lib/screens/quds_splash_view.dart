@@ -1,15 +1,32 @@
 import 'package:flutter/material.dart';
 
+/// Splash screen component with pre-defined components.
 class QudsSplashView extends StatefulWidget {
+  /// The futures to be executed.
   final List<Future>? futures;
+
+  /// The duration after all futures are executed.
   final Duration durationAfterExecutionFutures;
+
+  /// The logo widget.
   final Widget? logo;
+
+  /// The text under the logo.
   final String? textUnderLogo;
+
+  /// The text style of the text under the logo.
   final TextStyle? textUnderLogoStyle;
+
+  /// Called after  `all futures are executed` + `durationAfterExecutionFutures`
   final Function? onCompleted;
+
+  /// The futures progress indicator widget.
   final Widget? progressIndicator;
+
+  /// Weather to show the progress indicator.
   final bool? showIndicator;
 
+  /// Create an instance of [QudsSplashView]
   const QudsSplashView(
       {Key? key,
       this.futures,

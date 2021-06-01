@@ -2,20 +2,45 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:quds_ui_kit/quds_ui_kit.dart';
 
+/// Page route with combined transition with ability to customize.
 class QudsTransitionPageRoute<T> extends PageRoute<T> {
+  /// The builder of the next page.
   final Widget Function(BuildContext context) builder;
+
+  /// The duration of transition.
   final Duration duration;
+
+  /// The barrier color of the transition.
   final Color transitionColor;
-  final bool withFade;
-  final bool withRotate;
-  final bool withZoom;
-  final ZoomType zoomType;
-  final bool withSlide;
-  final SlideDirection slideDirection;
+
+  /// The curve of transition.
   final Curve curve;
+
+  /// Weather to apply fade transition.
+  final bool withFade;
+
+  /// Weather to apply rotation transition.
+  final bool withRotate;
+
+  /// Weather to apply zoom transition.
+  final bool withZoom;
+
+  /// The zoom type if [withZoom] is set to [true].
+  final ZoomType zoomType;
+
+  /// Weather to apply slide transition.
+  final bool withSlide;
+
+  /// The slide direction if [withSlide] set to [true].
+  final SlideDirection slideDirection;
+
+  /// The rotate alignment if [withRotate] set to [true.]
   final Alignment rotateAlignment;
+
+  /// The scale alignment if [withZoom] set to [true.]
   final Alignment scaleAlignment;
 
+  /// Create an instance of [QudsTransitionPageRoute]
   QudsTransitionPageRoute(
       {required this.builder,
       this.duration = const Duration(milliseconds: 400),

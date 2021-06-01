@@ -4,12 +4,26 @@ import 'quds_animated_combined_icons_button.dart';
 
 //A simple circled checkbox
 class QudsCheckbox extends StatelessWidget {
+  /// The value of the checkbox.
   final bool value;
+
+  /// Called when this checkbox value changes.
   final Function(bool newValue)? onChanged;
+
+  /// The color of the checkbox when checked.
   final Color? checkColor;
+
+  /// The color of the checkbox when unchecked.
   final Color? unCkeckColor;
-  final double? size;
+
+  /// The tooltip message of this button.
   final String? tooltip;
+
+  /// The text direction of the checkbox
+  final TextDirection? textDirection;
+
+  /// The size of the checkbox.
+  final double? size;
 
   /// [value] the check state of this checkbox
   /// [checkColor] the color of the widget when its value set to `true`
@@ -24,12 +38,14 @@ class QudsCheckbox extends StatelessWidget {
       this.unCkeckColor,
       this.onChanged,
       this.tooltip,
+      this.textDirection,
       this.size})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return QudsAnimatedCombinedIconsButton(
+      textDirection: textDirection,
       padding: EdgeInsets.all(2),
       startIcon: CupertinoIcons.checkmark_alt_circle_fill,
       endIcon: CupertinoIcons.circle,

@@ -4,4 +4,4 @@ export 'quds_checkbox.dart';
 export 'quds_checkbox_list_tile.dart';
 export 'quds_checkbox_with_text.dart';
 export 'quds_radian_button.dart';
-export 'quds_back_icon.dart';
+export 'quds_back_icon_button.dart';

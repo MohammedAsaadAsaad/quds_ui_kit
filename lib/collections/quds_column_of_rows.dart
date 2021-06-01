@@ -1,7 +1,7 @@
 import 'dart:math';
 import 'package:flutter/widgets.dart';
 
-/// [Column] of [Row]s
+/// Represents a [Column] of [Row]s
 class QudsColumnOfRows extends StatelessWidget {
   /// Collection of items
   final List<Widget> items;
@@ -12,13 +12,25 @@ class QudsColumnOfRows extends StatelessWidget {
   /// Items cross axis alignment for each row
   final CrossAxisAlignment? rowCrossAxisAlignment;
 
+  /// The column main axis alignment.
   final MainAxisAlignment? columnMainAxisAlignment;
+
+  /// The column cross axis alignment.
   final CrossAxisAlignment? columnCrossAxisAlignment;
+
+  /// The desired items count per each row.
   final int itemsPerRow;
+
+  /// The rows seperator divider hight.
   final double rowsSeperatorValue;
+
+  /// The column main axis size.
   final MainAxisSize? columnMainAxisSize;
+
+  /// The rows divider builder, if null, the divider will be an instance of [Divider]
   final Widget Function(BuildContext context)? seperatorBuilder;
 
+  /// Create an instance of [QudsColumnOfRows]
   QudsColumnOfRows(
       {required this.items,
       required this.itemsPerRow,

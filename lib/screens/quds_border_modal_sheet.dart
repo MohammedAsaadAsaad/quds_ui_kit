@@ -242,21 +242,22 @@ class _QudsBorderModalSheetState extends State<_QudsBorderModalSheet> {
           color: Colors.grey[400]),
     );
   }
+
+  Widget _buildVerticalDivider() {
+    return Center(
+        child: Container(
+      margin: EdgeInsets.symmetric(horizontal: 10),
+      width: 4,
+      height: 35,
+      decoration: BoxDecoration(
+          // boxShadow: [BoxShadow(offset: Offset(0.2, 0.2))],
+          borderRadius: BorderRadius.circular(10),
+          color: Colors.grey[400]),
+    ));
+  }
 }
 
-Widget _buildVerticalDivider() {
-  return Center(
-      child: Container(
-    margin: EdgeInsets.symmetric(horizontal: 10),
-    width: 4,
-    height: 35,
-    decoration: BoxDecoration(
-        // boxShadow: [BoxShadow(offset: Offset(0.2, 0.2))],
-        borderRadius: BorderRadius.circular(10),
-        color: Colors.grey[400]),
-  ));
-}
-
+/// Show modal border.
 Future<T?> showQudsModalBorderSheet<T>(
     BuildContext context, Widget Function(BuildContext context) builder,
     {BorderSheetPosition borderSheetPosition =
@@ -279,14 +280,38 @@ Future<T?> showQudsModalBorderSheet<T>(
           ));
 }
 
+/// The border sheet position.
 enum BorderSheetPosition {
+  /// If the screen is portrait, the sheet show at the bottom,
+  ///
+  /// If landscape, the sheet show at the end (left or right) according to the text direction.
+  /// `ltr => right` , `rtl => left`
   RespectToScreenOrientation,
+
+  /// If the screen is portrait, the sheet show at the top,
+  ///
+  /// If landscape, the sheet show at the end (left or right) according to the text direction.
+  /// `ltr => left` , `rtl => right`
   RespectToScreenOrientationReversed,
+
+  /// At the top of the screen.
   Top,
+
+  /// At the left of the screen.
   Left,
+
+  /// At the right of the screen.
   Right,
+
+  /// At the bottom of the screen.
   Bottom,
+
+  /// At the end (left or right) according to the text direction.
+  /// `ltr => left` , `rtl => right`
   Start,
+
+  /// At the end (left or right) according to the text direction.
+  /// `ltr => right` , `rtl => left`
   End
 }
 
