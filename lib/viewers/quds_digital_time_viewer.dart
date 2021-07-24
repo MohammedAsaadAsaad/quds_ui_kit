@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../quds_ui_kit.dart';
 
+/// A digital clock viewer with digits flipping effect.
 class QudsDigitalTimeViewer extends StatelessWidget {
   /// Weather to show in 24 format.
   final bool format24;
@@ -35,6 +36,7 @@ class QudsDigitalTimeViewer extends StatelessWidget {
   /// The millisecond component value, if set to [null], will not be shown.
   final int? milliSecond;
 
+  /// Create an instance of [QudsDigitalTimeViewer]
   const QudsDigitalTimeViewer(
       {Key? key,
       this.hour,

@@ -112,12 +112,12 @@ class _State extends State<DialogsScreen> {
                 : [
                     TextButton(
                         onPressed: () {
-                          Navigator.pop(context, 'save');
+                          Navigator.maybePop(context, 'save');
                         },
                         child: Text('Save')),
                     TextButton(
                         onPressed: () {
-                          Navigator.pop(context, 'cancel');
+                          Navigator.maybePop(context, 'cancel');
                         },
                         child: Text('Cancel'))
                   ],
@@ -182,10 +182,14 @@ class _State extends State<DialogsScreen> {
       SizedBox(
         height: 5,
       ),
-      ElevatedButton(
-          child: Text('Exit Dialog'),
-          onPressed: () => showQudsConfirmExitDialog(context,
-              onExitPressed: () => Navigator.pop(context))),
+      Directionality(
+          textDirection: TextDirection.ltr,
+          child: Builder(builder: (c) {
+            return ElevatedButton(
+                child: Text('Exit Dialog'),
+                onPressed: () => showQudsConfirmExitDialog(c,
+                    onExitPressed: () => Navigator.maybePop(context)));
+          })),
       SizedBox(
         height: 5,
       ),

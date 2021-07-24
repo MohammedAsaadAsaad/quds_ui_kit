@@ -4,7 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import '../quds_ui_kit.dart';
 
-//A flutter animated icon button
+/// A flutter animated icon button
 class QudsAnimatedIconButton extends StatelessWidget {
   /// The icon data of this widget.
   final AnimatedIconData iconData;

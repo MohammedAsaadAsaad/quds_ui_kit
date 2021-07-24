@@ -4,3 +4,4 @@ export 'quds_light_drawer.dart';
 export 'quds_toast.dart';
 export 'quds_dialog.dart';
 export 'quds_border_modal_sheet.dart';
+export 'quds_popup_menu.dart';

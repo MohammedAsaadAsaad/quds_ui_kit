@@ -331,7 +331,7 @@ class _SecondScreen extends StatelessWidget {
           ),
           IconButton(
               iconSize: 40,
-              onPressed: () => Navigator.pop(context),
+              onPressed: () => Navigator.maybePop(context),
               icon: Icon(
                 Icons.arrow_back,
               ))

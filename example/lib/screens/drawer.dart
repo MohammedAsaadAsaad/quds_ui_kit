@@ -43,13 +43,13 @@ class MainDrawer extends StatelessWidget {
           ListTile(
             leading: Icon(CupertinoIcons.circle),
             title: Text('Animations'),
-            onTap: () {
-              Navigator.pop(context);
-              Navigator.push(
-                  context,
-                  QudsZoomPageRoute(
-                      builder: (c) => AnimationsScreen(),
-                      transitionColor: Colors.black87));
+            onTap: () async {
+              if (await Navigator.maybePop(context))
+                Navigator.push(
+                    context,
+                    QudsZoomPageRoute(
+                        builder: (c) => AnimationsScreen(),
+                        transitionColor: Colors.black87));
             },
           ),
           ListTile(
@@ -59,7 +59,7 @@ class MainDrawer extends StatelessWidget {
               Navigator.pop(context);
               Navigator.push(
                   context,
-                  MaterialPageRoute(
+                  QudsRotatePageRoute(
                     builder: (c) => PageTransitionsScreen(),
                   ));
             },
@@ -104,7 +104,7 @@ class MainDrawer extends StatelessWidget {
             leading: Icon(CupertinoIcons.viewfinder),
             title: Text('Viewers'),
             onTap: () {
-              Navigator.pop(context);
+              Navigator.maybePop(context);
               Navigator.push(
                   context, MaterialPageRoute(builder: (c) => ViewersScreen()));
             },

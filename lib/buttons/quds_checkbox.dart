@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'quds_animated_combined_icons_button.dart';
 
-//A simple circled checkbox
+/// A simple circled checkbox
 class QudsCheckbox extends StatelessWidget {
   /// The value of the checkbox.
   final bool value;

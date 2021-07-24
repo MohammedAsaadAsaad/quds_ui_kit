@@ -62,13 +62,13 @@ class _QudsBorderModalSheetState extends State<_QudsBorderModalSheet> {
               bottomLeft: Radius.circular(radius),
               bottomRight: Radius.circular(radius),
             );
-      padding = const EdgeInsets.symmetric(horizontal: 2);
+      // padding = const EdgeInsets.symmetric(horizontal: 2);
       headerLine =
           fromBottom ? _HeaderLinePosition.Top : _HeaderLinePosition.Bottom;
     };
 
     var _fromHorizontal = (bool fromRight) {
-      padding = const EdgeInsets.symmetric(vertical: 2);
+      // padding = const EdgeInsets.symmetric(vertical: 2);
 
       sheetHeight = double.infinity;
       offset = Offset(!fromRight ? -1 : 1, 0);
@@ -216,7 +216,7 @@ class _QudsBorderModalSheetState extends State<_QudsBorderModalSheet> {
                 splashColor: Colors.transparent,
                 focusColor: Colors.transparent,
                 highlightColor: Colors.transparent,
-                onTap: () => Navigator.pop(context),
+                onTap: () => Navigator.maybePop(context),
               ),
               Align(alignment: alignment, child: result),
             ],

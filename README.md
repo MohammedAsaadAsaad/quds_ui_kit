@@ -233,6 +233,127 @@ class MainDrawer extends StatelessWidget {
 
 ![](https://i.imgur.com/lcO7Xlr.png)
 
+## QudsPopupMenu
+``` dart
+    QudsPopupButton(
+              // backgroundColor: Colors.red,
+              tooltip: 'T',
+              items: getMenuItems(),
+              child: Icon(Icons.menu)),
+      
+    
+List<QudsPopupMenuBase> getMenuItems() {
+    return [
+      QudsPopupMenuSection(
+          backgroundColor: Colors.yellow.shade200,
+          titleText: 'أبو أسعد الأمير',
+          subTitle: Text('See your profile'),
+          leading: Icon(
+            Icons.redeem,
+            size: 40,
+          ),
+          subItems: [
+            QudsPopupMenuSection(
+                titleText: 'Settings',
+                leading: Icon(Icons.settings),
+                subItems: [
+                  QudsPopupMenuItem(
+                      leading: Icon(Icons.logout),
+                      title: Text('Logout'),
+                      onPressed: () {
+                        showToast('Logout Pressed!');
+                      })
+                ]),
+          ]),
+      QudsPopupMenuDivider(),
+      QudsPopupMenuItem(
+          leading: Icon(Icons.info_outline),
+          title: Text('Give Feedback'),
+          subTitle: Text('Help us improve our new app'),
+          onPressed: () {
+            showToast('Feedback Pressed!');
+          }),
+      QudsPopupMenuDivider(),
+      QudsPopupMenuSection(
+          leading: Icon(Icons.place),
+          titleText: 'Settings & Privacy',
+          subItems: [
+            QudsPopupMenuItem(
+                leading: Icon(Icons.settings),
+                title: Text('Settings'),
+                onPressed: () {
+                  showToast('Settings Pressed!');
+                }),
+            QudsPopupMenuItem(
+                leading: Icon(Icons.lock),
+                title: Text('Privacy Checkup'),
+                onPressed: () {
+                  showToast('Privacy Checkup Pressed!');
+                }),
+            QudsPopupMenuItem(
+                leading: Icon(Icons.lock_clock),
+                title: Text('Privacy Shortcuts'),
+                onPressed: () {
+                  showToast('Privacy Shourtcuts Pressed!');
+                }),
+            QudsPopupMenuItem(
+                leading: Icon(Icons.list),
+                title: Text('Activity Log'),
+                onPressed: () {
+                  showToast('Activity Log Pressed!');
+                }),
+            QudsPopupMenuItem(
+                leading: Icon(Icons.card_membership),
+                title: Text('News Feed Preferences'),
+                onPressed: () {
+                  showToast('News Feed Preferences Pressed!');
+                }),
+            QudsPopupMenuItem(
+                leading: Icon(Icons.language),
+                title: Text('Language'),
+                onPressed: () {
+                  showToast('Language Pressed!');
+                }),
+          ]),
+      QudsPopupMenuDivider(),
+      QudsPopupMenuWidget(
+          builder: (c) => Container(
+              padding: EdgeInsets.all(10),
+              child: IntrinsicHeight(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    IconButton(
+                        onPressed: () {
+                          showToast('Favourite Pressed!');
+                        },
+                        icon: Icon(
+                          Icons.favorite,
+                          color: Colors.red,
+                        )),
+                    VerticalDivider(),
+                    IconButton(
+                        onPressed: () {},
+                        icon: Icon(
+                          Icons.music_note,
+                          color: Colors.blue,
+                        )),
+                    VerticalDivider(),
+                    IconButton(
+                        onPressed: () {},
+                        icon: Icon(
+                          Icons.umbrella,
+                          color: Colors.green,
+                        ))
+                  ],
+                ),
+              )))
+    ];
+  }
+        
+```
+![](https://i.imgur.com/kw8s7W4.gif)
+
 ## QudsSplashView
 
 ```

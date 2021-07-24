@@ -67,34 +67,43 @@ class QudsTransitionPageRoute<T> extends PageRoute<T> {
   Widget buildTransitions(BuildContext context, Animation<double> animation,
       Animation<double> secondaryAnimation, Widget child) {
     var ch = child;
-    if (this.withRotate)
+    if (this.withRotate) {
       ch = RotationTransition(
-        turns: CurvedAnimation(curve: this.curve, parent: animation),
+        turns: Tween<double>(begin: 0.85, end: 1).animate(animation),
         child: ch,
         alignment: rotateAlignment,
       );
 
-    if (this.withZoom)
+      ch = RotationTransition(
+        turns: Tween<double>(begin: 1, end: 1.15).animate(secondaryAnimation),
+        child: ch,
+        alignment: rotateAlignment,
+      );
+    }
+
+    if (this.withZoom) {
       ch = ScaleTransition(
         alignment: this.scaleAlignment,
         scale: Tween<double>(
                 begin: this.zoomType == ZoomType.In ? 0.8 : 1.2, end: 1)
             .animate(animation),
-
-        //  CurvedAnimation(
-        //     curve: this.curve,
-        //     parent: Tween<double>(
-        //             begin: this.zoomType == ZoomType.In ? 0.9 : 1.3, end: 1)
-        //         .animate(animation)),
         child: ch,
       );
 
-    if (this.withFade)
+      ch = ScaleTransition(
+          alignment: this.scaleAlignment,
+          scale: Tween<double>(
+                  begin: 1, end: this.zoomType == ZoomType.In ? 1.7 : 0.3)
+              .animate(secondaryAnimation),
+          child: ch);
+    }
+
+    if (this.withFade) {
       ch = FadeTransition(
         opacity: CurvedAnimation(curve: this.curve, parent: animation),
         child: ch,
       );
-
+    }
     if (this.withSlide) {
       var isLTR = Directionality.of(context) == TextDirection.ltr;
 
@@ -126,6 +135,12 @@ class QudsTransitionPageRoute<T> extends PageRoute<T> {
           break;
       }
 
+      ch = SlideTransition(
+          position: Tween<Offset>(
+            begin: Offset.zero,
+            end: Offset(-offset.dx / 2, -offset.dy / 2),
+          ).animate(CurvedAnimation(parent: secondaryAnimation, curve: curve)),
+          child: ch);
       ch = SlideTransition(
         position: Tween<Offset>(
           begin: offset,

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:quds_ui_kit/animations/quds_animated_text.dart';
 import '../quds_ui_kit.dart';
 
-// A checkbox with animated text
+/// A checkbox with animated text
 class QudsCheckboxWithText extends StatelessWidget {
   /// The value of the checkbox.
   final bool value;

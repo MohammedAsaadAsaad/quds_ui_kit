@@ -13,14 +13,19 @@ Future<void> showQudsConfirmDeleteDialog(BuildContext context,
     String? title = 'Delete',
     AlignmentGeometry alignment = Alignment.center,
     Color? backgroundColor,
+    Color? barrierColor,
     BorderRadius? borderRadius,
     String deleteText = 'Delete',
     String cancelText = 'Cancel',
+    bool withBlur = false,
     Function? onDeletePressed,
-    Function? onCancelPressed}) async {
+    Function? onCancelPressed,
+    bool withAnimatedSize = true}) async {
   await showQudsYesNoDialog(context,
       child: child,
+      barrierColor: barrierColor,
       builder: builder,
+      withBlur: withBlur,
       insetPadding: insetPadding,
       title: title == null ? null : Text(title),
       leadingActions: [
@@ -36,7 +41,8 @@ Future<void> showQudsConfirmDeleteDialog(BuildContext context,
       onNoPressed: onCancelPressed,
       yesColor: Colors.red,
       yesText: deleteText,
-      noText: cancelText);
+      noText: cancelText,
+      withAnimatedSize: withAnimatedSize);
 }
 
 /// Show confirmation exit dialog with two actions `Exit` - `Cancel`.
@@ -50,11 +56,16 @@ Future<void> showQudsConfirmExitDialog(BuildContext context,
     BorderRadius? borderRadius,
     String exitText = 'Exit',
     String cancelText = 'Cancel',
+    Color? barrierColor,
+    bool withBlur = false,
     Function? onExitPressed,
-    Function? onCancelPressed}) async {
+    Function? onCancelPressed,
+    bool withAnimatedSize = true}) async {
   await showQudsYesNoDialog(context,
       child: child,
       builder: builder,
+      withBlur: withBlur,
+      barrierColor: barrierColor,
       insetPadding: insetPadding,
       title: title == null ? null : Text(title),
       leadingActions: [
@@ -70,7 +81,8 @@ Future<void> showQudsConfirmExitDialog(BuildContext context,
       onNoPressed: onCancelPressed,
       yesColor: Colors.red,
       yesText: exitText,
-      noText: cancelText);
+      noText: cancelText,
+      withAnimatedSize: withAnimatedSize);
 }
 
 /// Show two actions dialog with  `Yes` - `No`.
@@ -86,17 +98,23 @@ Future<void> showQudsYesNoDialog(BuildContext context,
     String yesText = 'Yes',
     String noText = 'No',
     Color? yesColor,
+    Color? barrierColor,
+    bool withBlur = false,
     Color? noColor,
     Function? onYesPressed,
-    Function? onNoPressed}) async {
+    Function? onNoPressed,
+    bool withAnimatedSize = true}) async {
   var result = await showQudsDialog(context,
       child: child,
       builder: builder,
+      withBlur: withBlur,
+      barrierColor: barrierColor,
       insetPadding: insetPadding,
       title: title,
       leadingActions: leadingActions,
       alignment: alignment,
       backgroundColor: backgroundColor,
+      withAnimatedSize: withAnimatedSize,
       actions: [
         TextButton(
             style: yesColor == null
@@ -104,7 +122,7 @@ Future<void> showQudsYesNoDialog(BuildContext context,
                 : ButtonStyle(
                     foregroundColor: MaterialStateProperty.all(yesColor)),
             onPressed: () {
-              Navigator.pop(context, 'yes');
+              Navigator.maybePop(context, 'yes');
             },
             child: Text(yesText)),
         TextButton(
@@ -113,7 +131,7 @@ Future<void> showQudsYesNoDialog(BuildContext context,
                 : ButtonStyle(
                     foregroundColor: MaterialStateProperty.all(noColor)),
             onPressed: () {
-              Navigator.pop(context, 'no');
+              Navigator.maybePop(context, 'no');
             },
             child: Text(noText)),
       ]);
@@ -137,25 +155,27 @@ Future<T?> showQudsDialog<T>(BuildContext context,
     List<Widget>? leadingActions,
     AlignmentGeometry alignment = Alignment.center,
     Color? backgroundColor,
+    Color? barrierColor,
     BorderRadius? borderRadius,
-    bool withBlur = true}) async {
+    bool withBlur = false,
+    bool withAnimatedSize = true}) async {
   return await showDialog<T>(
       context: context,
-      barrierColor: !withBlur ? null : Colors.black12,
-      builder: (c) => AnimatedOpacity(
-          opacity: 1,
-          duration: const Duration(milliseconds: 1000),
-          child: QudsAutoAnimatedOpacity(
-              child: QudsDialog(
-                  child: child ?? (builder == null ? null : builder(context)),
-                  insetPadding: insetPadding,
-                  actions: actions,
-                  alignment: alignment,
-                  leadingActions: leadingActions,
-                  title: title,
-                  withBlur: withBlur,
-                  borderRadis: borderRadius,
-                  backgroundColor: backgroundColor))));
+      barrierColor:
+          barrierColor ?? (!withBlur ? Colors.black54 : Colors.black12),
+      builder: (c) => _QudsDialog(
+            context: context,
+            child: child ?? (builder == null ? null : builder(context)),
+            insetPadding: insetPadding,
+            actions: actions,
+            alignment: alignment,
+            leadingActions: leadingActions,
+            title: title,
+            withBlur: withBlur,
+            borderRadis: borderRadius,
+            backgroundColor: backgroundColor,
+            withAnimatedSize: withAnimatedSize,
+          ));
 }
 
 const EdgeInsets _defaultDialogInsetPadding =
@@ -163,7 +183,13 @@ const EdgeInsets _defaultDialogInsetPadding =
 final BorderRadius _defaultDialogBorderRadius = BorderRadius.circular(4);
 
 /// Represents a dialog with already defined components like title, body, bottom actions, leading icon.
-class QudsDialog extends StatelessWidget {
+class _QudsDialog extends StatelessWidget {
+  /// Weather to show the dialog with animated size.
+  final bool withAnimatedSize;
+
+  /// Pass the parent build context if re
+  final BuildContext? context;
+
   /// The padding of all of this dialog components.
   final EdgeInsets insetPadding;
 
@@ -192,8 +218,9 @@ class QudsDialog extends StatelessWidget {
   final bool withBlur;
 
   /// Create an instance of [QudsDialog]
-  const QudsDialog(
+  const _QudsDialog(
       {Key? key,
+      this.context,
       this.child,
       this.title,
       this.alignment = Alignment.center,
@@ -202,60 +229,72 @@ class QudsDialog extends StatelessWidget {
       this.borderRadis,
       this.actions,
       this.backgroundColor,
-      this.withBlur = true})
+      this.withBlur = false,
+      this.withAnimatedSize = true})
       : super(key: key);
   @override
-  Widget build(BuildContext context) {
-    var theme = Theme.of(context);
+  Widget build(BuildContext c) {
+    var theme = Theme.of(context ?? c);
+    var direction = Directionality.of(context ?? c);
+    Widget body = Directionality(
+        textDirection: direction,
+        child: IntrinsicWidth(
+            child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (leadingActions != null || title != null) ...[
+              Row(
+                children: [
+                  if (leadingActions != null) ...[
+                    ...leadingActions!,
+                    SizedBox(
+                      width: 5,
+                    )
+                  ],
+                  if (title != null)
+                    DefaultTextStyle(
+                        style: theme.textTheme.headline5!, child: title!),
+                ],
+              ),
+              SizedBox(height: 5),
+            ],
+            child ?? Container(),
+            if (actions != null) ...[
+              SizedBox(
+                height: 5,
+              ),
+              Container(
+                  alignment: AlignmentDirectional.centerEnd,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [...actions!],
+                  ))
+            ]
+          ],
+        )));
 
-    Widget body = Material(
+    if (withAnimatedSize)
+      body = QudsAutoAnimatedSize(
+          duration: Duration(milliseconds: 1000), child: body);
+
+    body = Material(
         elevation: 5,
         color: backgroundColor,
         borderRadius: this.borderRadis ?? _defaultDialogBorderRadius,
         child: SafeArea(
             child: Container(
           padding: EdgeInsets.all(10),
-          child: IntrinsicWidth(
-              child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              if (leadingActions != null || title != null) ...[
-                Row(
-                  children: [
-                    if (leadingActions != null) ...[
-                      ...leadingActions!,
-                      SizedBox(
-                        width: 5,
-                      )
-                    ],
-                    if (title != null)
-                      DefaultTextStyle(
-                          style: theme.textTheme.headline5!, child: title!),
-                  ],
-                ),
-                SizedBox(height: 5),
-              ],
-              child ?? Container(),
-              if (actions != null) ...[
-                SizedBox(
-                  height: 5,
-                ),
-                Container(
-                    alignment: AlignmentDirectional.centerEnd,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [...actions!],
-                    ))
-              ]
-            ],
-          )),
+          child: body,
         )));
 
     if (withBlur)
       body = BackdropFilter(
           filter: new ImageFilter.blur(sigmaX: 2.0, sigmaY: 2.0), child: body);
+
+    body = QudsAutoAnimatedOpacity(curve: Curves.ease, child: body);
+
     return Container(
       alignment: this.alignment,
       padding: this.insetPadding,

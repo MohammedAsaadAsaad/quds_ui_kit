@@ -155,7 +155,7 @@ class _State extends State<BottomDialogsScreen> {
                             startIcon: Icons.add,
                             endIcon: Icons.done,
                           )),
-                      onTap: () => Navigator.pop(context),
+                      onTap: () => Navigator.maybePop(context),
                       title: QudsAutoAnimatedSlide(child: Text('Hi')))
               ],
             ),

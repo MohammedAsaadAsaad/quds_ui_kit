@@ -20,7 +20,7 @@ class QudsBackIconButton extends StatelessWidget {
               showStartIcon: false,
               startIcon: Icons.menu,
               endIcon: Icons.arrow_back)),
-      onPressed: () => Navigator.pop(context),
+      onPressed: () => Navigator.maybePop(context),
     );
   }
 }
