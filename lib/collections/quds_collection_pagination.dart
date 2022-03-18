@@ -36,15 +36,6 @@ class QudsCollectionPagination<T> extends StatelessWidget {
   /// The desired page items counts like `[ 5 , 10 , 20 ]`
   final List<int> pageItemLengths;
 
-  /// Text of 'Results' label.
-  final String resultsText;
-
-  /// Text of 'Of' label.
-  final String ofText;
-
-  /// Text of 'Results per page' label.
-  final String resultsPerPageText;
-
   /// The items cross axis alignment.
   final CrossAxisAlignment crossAxisAlignment;
 
@@ -61,10 +52,7 @@ class QudsCollectionPagination<T> extends StatelessWidget {
       this.onResultsPerPageChanged,
       this.resultsPerPage = 5,
       this.pageItemLengths = const [5, 10, 20, 30, 50, 100],
-      this.resultsText = 'Results',
-      this.ofText = 'of',
       this.crossAxisAlignment = CrossAxisAlignment.start,
-      this.resultsPerPageText = 'Results per page',
       this.itemsPadding,
       required this.total})
       : assert(selectedPage >= 1),
@@ -171,7 +159,7 @@ class QudsCollectionPagination<T> extends StatelessWidget {
     }
     for (int i = 1; i <= pages.length; i++) {}
     //Temp
-    return isPortrait
+    var result = isPortrait
         ? SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             padding: EdgeInsets.all(5),
@@ -187,22 +175,34 @@ class QudsCollectionPagination<T> extends StatelessWidget {
               children: widgetNums.length <= 0 ? [] : widgetNums,
             ),
           );
+
+    return Container(
+      margin: EdgeInsets.all(4),
+      child: result,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          color: Theme.of(context).scaffoldBackgroundColor,
+          boxShadow: [BoxShadow(blurRadius: 5, color: Colors.black26)]),
+    );
   }
 
   Widget _buildNumButton(int? i, BuildContext context) {
+    var isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
+
     var style = Theme.of(context).textTheme.bodyText1!;
     var border = BorderRadius.circular(3);
     return Container(
-      padding: EdgeInsets.all(i == null ? 0 : 5),
+      // padding: EdgeInsets.all(i == null ? 0 : 5),
       child: Material(
         borderRadius: border,
-        elevation: i == null ? 0 : 3,
+        // elevation: i == null ? 0 : 3,
         child: InkWell(
           customBorder: RoundedRectangleBorder(borderRadius: border),
           child: Container(
             child: Text(i == null ? '...' : i.toString(),
                 style: i == selectedPage
-                    ? style.copyWith(fontWeight: FontWeight.bold, fontSize: 30)
+                    ? style.copyWith(
+                        height: 0.8, fontWeight: FontWeight.bold, fontSize: 30)
                     : style),
             padding: EdgeInsets.all(10),
           ),
@@ -229,14 +229,6 @@ class QudsCollectionPagination<T> extends StatelessWidget {
                 isRow: isPortrait,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  if (isPortrait)
-                    Text(
-                      resultsText + ': ',
-                      style: style.copyWith(fontWeight: FontWeight.bold),
-                    ),
-                  SizedBox(
-                    width: 5,
-                  ),
                   Text(
                     ((selectedPage - 1) * resultsPerPage + 1).toString() +
                         ' - ' +
@@ -246,8 +238,10 @@ class QudsCollectionPagination<T> extends StatelessWidget {
                     style: style,
                   ),
                   Text(
-                    '  $ofText  ',
-                    style: style.copyWith(fontWeight: FontWeight.bold),
+                    isPortrait ? ' \\ ' : 'ــــ',
+                    style: style.copyWith(
+                        height: isPortrait ? null : 0,
+                        fontWeight: FontWeight.bold),
                   ),
                   Text(
                     total.toString(),
@@ -261,11 +255,6 @@ class QudsCollectionPagination<T> extends StatelessWidget {
               ),
               Row(
                 children: <Widget>[
-                  if (isPortrait)
-                    Text(
-                      resultsPerPageText + ': ',
-                      style: TextStyle(fontSize: 14),
-                    ),
                   DropdownButton<int>(
                     value: resultsPerPage,
                     items: pageItemLengths

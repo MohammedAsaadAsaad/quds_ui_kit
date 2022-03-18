@@ -1,8 +1,6 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:quds_ui_kit/animations/quds_animated_combined_icons.dart';
 import 'package:quds_ui_kit/buttons/quds_buttons.dart';
 

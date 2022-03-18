@@ -43,15 +43,15 @@ class _QudsAutoAnimatedSizeSize extends State<QudsAutoAnimatedSize>
   @override
   Widget build(BuildContext context) {
     return AnimatedSize(
-        alignment: widget.alignment,
-        child: showChild
-            ? widget.child
-            : Container(
-                width: 1,
-                height: 1,
-              ),
-        curve: Curves.fastLinearToSlowEaseIn,
-        duration: widget.duration,
-        vsync: this);
+      alignment: widget.alignment,
+      child: showChild
+          ? widget.child
+          : Container(
+              width: 1,
+              height: 1,
+            ),
+      curve: Curves.fastLinearToSlowEaseIn,
+      duration: widget.duration,
+    );
   }
 }

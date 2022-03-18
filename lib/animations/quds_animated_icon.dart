@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 /// A wrap of flutter embedded [AnimatedIcon]s with simlpe control.
 class QudsAnimatedIcon extends StatefulWidget {

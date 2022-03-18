@@ -142,7 +142,7 @@ class _ExampleCollectionProvider {
   List<_ExampleModel> list = [];
   _ExampleCollectionProvider() {
     //Fill with test models
-    for (int i = 1; i <= 23; i++)
+    for (int i = 1; i <= 100; i++)
       list.add(_ExampleModel(i, 'name: ' + i.toString()));
   }
 

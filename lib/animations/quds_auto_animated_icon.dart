@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import '../quds_ui_kit.dart';
 
 /// An auto [AnimatedIconData] animator.

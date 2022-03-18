@@ -63,8 +63,8 @@ class QudsCheckboxListTile extends StatelessWidget {
     Widget checkbox = QudsAnimatedCombinedIcons(
       startIcon: CupertinoIcons.checkmark_alt_circle_fill,
       endIcon: CupertinoIcons.circle,
-      startIconColor: checkColor ?? Theme.of(context).accentColor,
-      endIconColor: unCkeckColor ?? Theme.of(context).accentColor,
+      startIconColor: checkColor ?? Theme.of(context).colorScheme.secondary,
+      endIconColor: unCkeckColor ?? Theme.of(context).colorScheme.secondary,
       iconSize: size,
       showStartIcon: value,
       textDirection: textDirection,

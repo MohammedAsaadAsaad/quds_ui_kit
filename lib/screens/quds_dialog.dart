@@ -1,8 +1,5 @@
 import 'dart:ui';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:quds_ui_kit/animations/quds_animations.dart';
 
 /// Show confirmation delete dialog with two actions `Delete` - `Cancel`.

@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:quds_ui_kit/animations/quds_animated_text.dart';
 import '../quds_ui_kit.dart';
 
 /// A checkbox with animated text
@@ -59,8 +58,8 @@ class QudsCheckboxWithText extends StatelessWidget {
       iconSize: checkSize,
       startIcon: CupertinoIcons.checkmark_alt_circle_fill,
       endIcon: CupertinoIcons.circle,
-      startIconColor: checkColor ?? Theme.of(context).accentColor,
-      endIconColor: unCkeckColor ?? Theme.of(context).accentColor,
+      startIconColor: checkColor ?? Theme.of(context).colorScheme.secondary,
+      endIconColor: unCkeckColor ?? Theme.of(context).colorScheme.secondary,
       showStartIcon: value,
     );
 

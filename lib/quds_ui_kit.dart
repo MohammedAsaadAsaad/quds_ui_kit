@@ -1,3 +1,11 @@
+/// Quds UI Kit provides
+/// * (animating icons, buttons, texts, counter, digital clock)
+/// * page transitions
+/// * toasts
+/// * dialogs
+/// * pagination
+/// * splash screen
+/// * ... etc.
 library quds_ui_kit;
 
 export 'buttons/quds_buttons.dart';
