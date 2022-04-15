@@ -71,7 +71,7 @@ class QudsDigitalTimeViewer extends StatelessWidget {
               isMorning ? amText : pmText,
               style: timePeriodStyle,
             ),
-            SizedBox(
+            const SizedBox(
               width: 5,
             )
           ],
@@ -100,13 +100,12 @@ class QudsDigitalTimeViewer extends StatelessWidget {
       ));
 
   Widget _buildNumberBlock(BuildContext context, int number, [int? length]) {
-    var backColor = this.backgroundColor ?? Theme.of(context).primaryColor;
+    var backColor = backgroundColor ?? Theme.of(context).primaryColor;
     return Container(
-      padding: EdgeInsets.all(3),
+      padding: const EdgeInsets.all(3),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(4), color: backColor),
-      child:
-          QudsAnimatedCounter(number, length: length ?? 2, style: this.style),
+      child: QudsAnimatedCounter(number, length: length ?? 2, style: style),
     );
   }
 }

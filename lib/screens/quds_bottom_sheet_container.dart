@@ -19,12 +19,12 @@ class _BottomSheetContainer extends StatelessWidget {
   final EdgeInsets? contentPadding;
   final String? titleText;
   final Widget? title;
-  _BottomSheetContainer(
+  const _BottomSheetContainer(
       {required this.child, this.title, this.titleText, this.contentPadding});
 
   @override
   Widget build(BuildContext context) {
-    var radius = BorderRadius.only(
+    var radius = const BorderRadius.only(
         topRight: Radius.circular(20), topLeft: Radius.circular(20));
     Widget result = ClipRRect(
       borderRadius: radius,
@@ -38,13 +38,14 @@ class _BottomSheetContainer extends StatelessWidget {
             children: [
               _buildHeader(),
               if (title != null || titleText != null)
-                Divider(
+                const Divider(
                   height: 1,
                 ),
               SizedBox(
                   child: Container(
                 child: Material(child: child),
-                padding: contentPadding ?? EdgeInsets.symmetric(horizontal: 20),
+                padding: contentPadding ??
+                    const EdgeInsets.symmetric(horizontal: 20),
               )),
             ],
           )),
@@ -59,33 +60,29 @@ class _BottomSheetContainer extends StatelessWidget {
   }
 
   Widget _buildHeader() {
-    return Container(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          margin: const EdgeInsets.symmetric(vertical: 10),
+          width: 35,
+          height: 4,
+          decoration: BoxDecoration(
+              // boxShadow: [BoxShadow(offset: Offset(0.2, 0.2))],
+              borderRadius: BorderRadius.circular(10),
+              color: Colors.grey[400]),
+        ),
+        if (title != null)
           Container(
-            margin: EdgeInsets.symmetric(vertical: 10),
-            width: 35,
-            height: 4,
-            decoration: BoxDecoration(
-                // boxShadow: [BoxShadow(offset: Offset(0.2, 0.2))],
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.grey[400]),
+            padding: const EdgeInsets.symmetric(horizontal: 5),
+            child: title,
           ),
-          if (title != null)
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 5),
-              child: title,
-            ),
-          if (title == null && titleText != null)
-            Container(
-              child: Text(
-                titleText!,
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-              ),
-            )
-        ],
-      ),
+        if (title == null && titleText != null)
+          Text(
+            titleText!,
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          )
+      ],
     );
   }
 }

@@ -26,7 +26,7 @@ Future<void> showQudsConfirmDeleteDialog(BuildContext context,
       insetPadding: insetPadding,
       title: title == null ? null : Text(title),
       leadingActions: [
-        QudsAutoAnimatedCombinedIcons(
+        const QudsAutoAnimatedCombinedIcons(
           startIcon: Icons.info_outline,
           endIcon: Icons.delete_outlined,
           endIconColor: Colors.red,
@@ -66,7 +66,7 @@ Future<void> showQudsConfirmExitDialog(BuildContext context,
       insetPadding: insetPadding,
       title: title == null ? null : Text(title),
       leadingActions: [
-        QudsAutoAnimatedCombinedIcons(
+        const QudsAutoAnimatedCombinedIcons(
           startIcon: Icons.info_outline,
           endIcon: Icons.exit_to_app_rounded,
           endIconColor: Colors.red,
@@ -176,7 +176,7 @@ Future<T?> showQudsDialog<T>(BuildContext context,
 }
 
 const EdgeInsets _defaultDialogInsetPadding =
-    const EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0);
+    EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0);
 final BorderRadius _defaultDialogBorderRadius = BorderRadius.circular(4);
 
 /// Represents a dialog with already defined components like title, body, bottom actions, leading icon.
@@ -245,7 +245,7 @@ class _QudsDialog extends StatelessWidget {
                 children: [
                   if (leadingActions != null) ...[
                     ...leadingActions!,
-                    SizedBox(
+                    const SizedBox(
                       width: 5,
                     )
                   ],
@@ -254,11 +254,11 @@ class _QudsDialog extends StatelessWidget {
                         style: theme.textTheme.headline5!, child: title!),
                 ],
               ),
-              SizedBox(height: 5),
+              const SizedBox(height: 5),
             ],
             child ?? Container(),
             if (actions != null) ...[
-              SizedBox(
+              const SizedBox(
                 height: 5,
               ),
               Container(
@@ -272,29 +272,31 @@ class _QudsDialog extends StatelessWidget {
           ],
         )));
 
-    if (withAnimatedSize)
+    if (withAnimatedSize) {
       body = QudsAutoAnimatedSize(
-          duration: Duration(milliseconds: 1000), child: body);
+          duration: const Duration(milliseconds: 1000), child: body);
+    }
 
     body = Material(
         elevation: 5,
         color: backgroundColor,
-        borderRadius: this.borderRadis ?? _defaultDialogBorderRadius,
+        borderRadius: borderRadis ?? _defaultDialogBorderRadius,
         child: SafeArea(
             child: Container(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           child: body,
         )));
 
-    if (withBlur)
+    if (withBlur) {
       body = BackdropFilter(
-          filter: new ImageFilter.blur(sigmaX: 2.0, sigmaY: 2.0), child: body);
+          filter: ImageFilter.blur(sigmaX: 2.0, sigmaY: 2.0), child: body);
+    }
 
     body = QudsAutoAnimatedOpacity(curve: Curves.ease, child: body);
 
     return Container(
-      alignment: this.alignment,
-      padding: this.insetPadding,
+      alignment: alignment,
+      padding: insetPadding,
       child: body,
     );
   }

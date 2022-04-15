@@ -46,7 +46,7 @@ class _QudsAutoAnimatedSizeSize extends State<QudsAutoAnimatedSize>
       alignment: widget.alignment,
       child: showChild
           ? widget.child
-          : Container(
+          : const SizedBox(
               width: 1,
               height: 1,
             ),

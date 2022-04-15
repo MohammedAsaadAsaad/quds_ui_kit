@@ -71,7 +71,9 @@ class QudsAutoAnimatedCombinedIcons extends StatefulWidget {
       this.curve = Curves.fastLinearToSlowEaseIn,
       this.duration = const Duration(milliseconds: 400),
       this.textDirection,
-      this.startAnimationAfter = const Duration(milliseconds: 300)});
+      this.startAnimationAfter = const Duration(milliseconds: 300),
+      Key? key})
+      : super(key: key);
 
   @override
   _QudsAutoAnimatedCombinedIconsState createState() =>

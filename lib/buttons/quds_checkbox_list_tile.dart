@@ -70,7 +70,7 @@ class QudsCheckboxListTile extends StatelessWidget {
       textDirection: textDirection,
     );
 
-    checkbox = Container(
+    checkbox = SizedBox(
       child: checkbox,
       width: 40,
     );

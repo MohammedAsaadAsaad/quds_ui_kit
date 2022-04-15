@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -48,7 +50,8 @@ class _QudsBorderModalSheetState extends State<_QudsBorderModalSheet> {
     EdgeInsets? padding;
     late _HeaderLinePosition headerLine;
 
-    var _fromVertical = (bool fromBottom) {
+    Null Function(bool fromBottom) _fromVertical;
+    _fromVertical = (bool fromBottom) {
       sheetWidth = double.infinity;
       offset = fromBottom ? const Offset(0, 1) : const Offset(0, -1);
       alignment = fromBottom ? Alignment.bottomCenter : Alignment.topCenter;
@@ -67,7 +70,8 @@ class _QudsBorderModalSheetState extends State<_QudsBorderModalSheet> {
           fromBottom ? _HeaderLinePosition.Top : _HeaderLinePosition.Bottom;
     };
 
-    var _fromHorizontal = (bool fromRight) {
+    Null Function(bool fromRight) _fromHorizontal;
+    _fromHorizontal = (bool fromRight) {
       // padding = const EdgeInsets.symmetric(vertical: 2);
 
       sheetHeight = double.infinity;
@@ -90,17 +94,19 @@ class _QudsBorderModalSheetState extends State<_QudsBorderModalSheet> {
 
     switch (widget.borderSheetPosition) {
       case BorderSheetPosition.RespectToScreenOrientation:
-        if (portrait)
+        if (portrait) {
           _fromVertical(true);
-        else
+        } else {
           _fromHorizontal(ltr);
+        }
         break;
 
       case BorderSheetPosition.RespectToScreenOrientationReversed:
-        if (portrait)
+        if (portrait) {
           _fromVertical(false);
-        else
+        } else {
           _fromHorizontal(!ltr);
+        }
         break;
       case BorderSheetPosition.Bottom:
         _fromVertical(true);
@@ -124,7 +130,7 @@ class _QudsBorderModalSheetState extends State<_QudsBorderModalSheet> {
     }
 
     var titleDivider = (widget.title != null || widget.titleText != null)
-        ? Divider(
+        ? const Divider(
             height: 1,
           )
         : Container();
@@ -132,15 +138,15 @@ class _QudsBorderModalSheetState extends State<_QudsBorderModalSheet> {
       if (widget.borderSheetPosition == BorderSheetPosition.Top) titleDivider,
       if (widget.title != null)
         Container(
-          padding: EdgeInsets.symmetric(horizontal: 5),
+          padding: const EdgeInsets.symmetric(horizontal: 5),
           child: widget.title,
         ),
       if (widget.title == null && widget.titleText != null)
         Container(
-          padding: EdgeInsets.all(5),
+          padding: const EdgeInsets.all(5),
           child: Text(
             widget.titleText!,
-            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
         ),
       if (widget.borderSheetPosition != BorderSheetPosition.Top) titleDivider
@@ -203,7 +209,7 @@ class _QudsBorderModalSheetState extends State<_QudsBorderModalSheet> {
             maxHeight: sheetMaxSize.height, maxWidth: sheetMaxSize.width),
         child: result);
 
-    result = Container(
+    result = SizedBox(
         width: double.infinity,
         height: double.infinity,
         child: SafeArea(
@@ -233,7 +239,7 @@ class _QudsBorderModalSheetState extends State<_QudsBorderModalSheet> {
 
   Widget _buildHorizontalDivider() {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
+      margin: const EdgeInsets.symmetric(vertical: 10),
       width: 35,
       height: 4,
       decoration: BoxDecoration(
@@ -246,7 +252,7 @@ class _QudsBorderModalSheetState extends State<_QudsBorderModalSheet> {
   Widget _buildVerticalDivider() {
     return Center(
         child: Container(
-      margin: EdgeInsets.symmetric(horizontal: 10),
+      margin: const EdgeInsets.symmetric(horizontal: 10),
       width: 4,
       height: 35,
       decoration: BoxDecoration(

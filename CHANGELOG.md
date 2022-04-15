@@ -67,3 +67,7 @@
 
 ## [0.0.7+5]
 * Added `QudsPopupMenu`.
+
+## [0.0.7+7]
+* Updated `QudsPopupMenu`.
+* Applied flutter lints .

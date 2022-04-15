@@ -54,7 +54,7 @@ class QudsCheckboxWithText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var checkbox = QudsAnimatedCombinedIcons(
-      textDirection: this.textDirection,
+      textDirection: textDirection,
       iconSize: checkSize,
       startIcon: CupertinoIcons.checkmark_alt_circle_fill,
       endIcon: CupertinoIcons.circle,
@@ -71,7 +71,7 @@ class QudsCheckboxWithText extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         checkbox,
-        SizedBox(
+        const SizedBox(
           width: 5,
         ),
         text
@@ -80,14 +80,15 @@ class QudsCheckboxWithText extends StatelessWidget {
 
     result = Container(
       child: result,
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
     );
 
-    if (this.tooltip != null)
+    if (tooltip != null) {
       result = Tooltip(
         message: tooltip!,
         child: result,
       );
+    }
 
     result = InkWell(
       child: result,

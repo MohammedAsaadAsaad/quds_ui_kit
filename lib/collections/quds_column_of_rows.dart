@@ -31,7 +31,7 @@ class QudsColumnOfRows extends StatelessWidget {
   final Widget Function(BuildContext context)? seperatorBuilder;
 
   /// Create an instance of [QudsColumnOfRows]
-  QudsColumnOfRows(
+  const QudsColumnOfRows(
       {required this.items,
       required this.itemsPerRow,
       this.rowMainAxisAlignment = MainAxisAlignment.spaceEvenly,
@@ -40,35 +40,37 @@ class QudsColumnOfRows extends StatelessWidget {
       this.columnCrossAxisAlignment,
       this.columnMainAxisAlignment,
       this.columnMainAxisSize = MainAxisSize.min,
-      this.seperatorBuilder})
-      : assert(itemsPerRow > 0);
+      this.seperatorBuilder,
+      Key? key})
+      : assert(itemsPerRow > 0),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var itemsTemp = items.toList();
 
     List<Row> rows = [];
-    while (itemsTemp.length > 0) {
+    while (itemsTemp.isNotEmpty) {
       var start = 0;
       var end = min(itemsTemp.length, itemsPerRow);
       rows.add(Row(
         crossAxisAlignment: rowCrossAxisAlignment ?? CrossAxisAlignment.center,
         mainAxisAlignment:
-            this.rowMainAxisAlignment ?? MainAxisAlignment.spaceEvenly,
+            rowMainAxisAlignment ?? MainAxisAlignment.spaceEvenly,
         children: itemsTemp.getRange(start, end).toList(),
       ));
       itemsTemp.removeRange(start, end);
     }
     return Column(
-      mainAxisSize: this.columnMainAxisSize ?? MainAxisSize.min,
+      mainAxisSize: columnMainAxisSize ?? MainAxisSize.min,
       children: rows
           .map((e) => Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   e,
                   if (e != rows.last)
-                    this.seperatorBuilder != null
-                        ? this.seperatorBuilder!(context)
+                    seperatorBuilder != null
+                        ? seperatorBuilder!(context)
                         : SizedBox(
                             height: rowsSeperatorValue,
                           )

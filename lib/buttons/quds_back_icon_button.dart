@@ -12,9 +12,8 @@ class QudsBackIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return QudsRadianButton(
-      tooltip:
-          this.tooltip ?? MaterialLocalizations.of(context).backButtonTooltip,
-      child: Padding(
+      tooltip: tooltip ?? MaterialLocalizations.of(context).backButtonTooltip,
+      child: const Padding(
           padding: EdgeInsets.all(7),
           child: QudsAutoAnimatedCombinedIcons(
               showStartIcon: false,

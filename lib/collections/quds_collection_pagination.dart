@@ -43,7 +43,7 @@ class QudsCollectionPagination<T> extends StatelessWidget {
   final EdgeInsets? itemsPadding;
 
   /// Create an instance of [QudsCollectionPagination].
-  QudsCollectionPagination(
+  const QudsCollectionPagination(
       {required this.selectedPage,
       required this.currentPageItems,
       required this.itemBuilder,
@@ -54,10 +54,12 @@ class QudsCollectionPagination<T> extends StatelessWidget {
       this.pageItemLengths = const [5, 10, 20, 30, 50, 100],
       this.crossAxisAlignment = CrossAxisAlignment.start,
       this.itemsPadding,
-      required this.total})
+      required this.total,
+      Key? key})
       : assert(selectedPage >= 1),
         assert(total >= 0),
-        assert(resultsPerPage > 0);
+        assert(resultsPerPage > 0),
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +90,7 @@ class QudsCollectionPagination<T> extends StatelessWidget {
         ? Material(
             elevation: 3,
             child: Container(
-              padding: EdgeInsets.only(bottom: 10),
+              padding: const EdgeInsets.only(bottom: 10),
               child: Column(
                 children: <Widget>[
                   _buildPagesControls(context),
@@ -97,13 +99,13 @@ class QudsCollectionPagination<T> extends StatelessWidget {
               ),
             ),
           )
-        : Container(
+        : SizedBox(
             height: double.infinity,
             child: Material(
               elevation: 3,
               child: Container(
                 height: double.infinity,
-                padding: EdgeInsets.only(bottom: 10),
+                padding: const EdgeInsets.only(bottom: 10),
                 child: Row(
                   children: <Widget>[
                     _buildPagesControls(context),
@@ -128,9 +130,11 @@ class QudsCollectionPagination<T> extends StatelessWidget {
 
     List<int> pages = [];
 
-    var addPage = (int i) {
-      if (pages.length < 5 && !pages.contains(i) && i > 0 && i <= _totalPages)
+    Null Function(int i) addPage;
+    addPage = (int i) {
+      if (pages.length < 5 && !pages.contains(i) && i > 0 && i <= _totalPages) {
         pages.add(i);
+      }
     };
 
     addPage(1);
@@ -147,14 +151,15 @@ class QudsCollectionPagination<T> extends StatelessWidget {
 
     List<Widget> widgetNums = [];
     for (int i = 0; i < pages.length; i++) {
-      if (i == 0)
+      if (i == 0) {
         widgetNums.add(_buildNumButton(pages[i], context));
-      else {
+      } else {
         if (pages[i - 1] != pages[i] - 1) {
           widgetNums.add(_buildNumButton(null, context));
           widgetNums.add(_buildNumButton(pages[i], context));
-        } else
+        } else {
           widgetNums.add(_buildNumButton(pages[i], context));
+        }
       }
     }
     for (int i = 1; i <= pages.length; i++) {}
@@ -162,62 +167,57 @@ class QudsCollectionPagination<T> extends StatelessWidget {
     var result = isPortrait
         ? SingleChildScrollView(
             scrollDirection: Axis.horizontal,
-            padding: EdgeInsets.all(5),
+            padding: const EdgeInsets.all(5),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: widgetNums.length <= 0 ? [] : widgetNums,
+              children: widgetNums.isEmpty ? [] : widgetNums,
             ),
           )
         : SingleChildScrollView(
-            padding: EdgeInsets.all(5),
+            padding: const EdgeInsets.all(5),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: widgetNums.length <= 0 ? [] : widgetNums,
+              children: widgetNums.isEmpty ? [] : widgetNums,
             ),
           );
 
     return Container(
-      margin: EdgeInsets.all(4),
+      margin: const EdgeInsets.all(4),
       child: result,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
           color: Theme.of(context).scaffoldBackgroundColor,
-          boxShadow: [BoxShadow(blurRadius: 5, color: Colors.black26)]),
+          boxShadow: const [BoxShadow(blurRadius: 5, color: Colors.black26)]),
     );
   }
 
   Widget _buildNumButton(int? i, BuildContext context) {
-    var isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
-
     var style = Theme.of(context).textTheme.bodyText1!;
     var border = BorderRadius.circular(3);
-    return Container(
-      // padding: EdgeInsets.all(i == null ? 0 : 5),
-      child: Material(
-        borderRadius: border,
-        // elevation: i == null ? 0 : 3,
-        child: InkWell(
-          customBorder: RoundedRectangleBorder(borderRadius: border),
-          child: Container(
-            child: Text(i == null ? '...' : i.toString(),
-                style: i == selectedPage
-                    ? style.copyWith(
-                        height: 0.8, fontWeight: FontWeight.bold, fontSize: 30)
-                    : style),
-            padding: EdgeInsets.all(10),
-          ),
-          onTap: i == null ? null : () => onPageChanged.call(i),
+    return Material(
+      borderRadius: border,
+      // elevation: i == null ? 0 : 3,
+      child: InkWell(
+        customBorder: RoundedRectangleBorder(borderRadius: border),
+        child: Container(
+          child: Text(i == null ? '...' : i.toString(),
+              style: i == selectedPage
+                  ? style.copyWith(
+                      height: 0.8, fontWeight: FontWeight.bold, fontSize: 30)
+                  : style),
+          padding: const EdgeInsets.all(10),
         ),
+        onTap: i == null ? null : () => onPageChanged.call(i),
       ),
     );
   }
 
   Widget _buildResultsStatistics(BuildContext context) {
     var isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
-    var style = TextStyle(fontSize: 18);
+    var style = const TextStyle(fontSize: 18);
 
     var result = Container(
-      padding: EdgeInsets.symmetric(horizontal: 5),
+      padding: const EdgeInsets.symmetric(horizontal: 5),
       child: SingleChildScrollView(
           scrollDirection: isPortrait ? Axis.horizontal : Axis.vertical,
           child: Container(
@@ -249,7 +249,7 @@ class QudsCollectionPagination<T> extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 width: 15,
                 height: 15,
               ),
@@ -262,7 +262,7 @@ class QudsCollectionPagination<T> extends StatelessWidget {
                             (e) => DropdownMenuItem<int>(
                                   child: Text(
                                     e.toString(),
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold),
                                   ),

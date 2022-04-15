@@ -46,14 +46,14 @@ class QudsCheckbox extends StatelessWidget {
   Widget build(BuildContext context) {
     return QudsAnimatedCombinedIconsButton(
       textDirection: textDirection,
-      padding: EdgeInsets.all(2),
+      padding: const EdgeInsets.all(2),
       startIcon: CupertinoIcons.checkmark_alt_circle_fill,
       endIcon: CupertinoIcons.circle,
       startIconColor: checkColor ?? Theme.of(context).colorScheme.secondary,
       endIconColor: unCkeckColor ?? Theme.of(context).colorScheme.secondary,
       showStartIcon: value,
       iconSize: size,
-      tooltip: this.tooltip,
+      tooltip: tooltip,
       onPressed: onChanged == null ? null : () => onChanged!.call(!value),
     );
   }

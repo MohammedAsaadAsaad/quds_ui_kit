@@ -33,9 +33,11 @@ class QudsAutoAnimatedOpacity extends StatefulWidget {
       this.finalOpacity = 1,
       this.curve = Curves.fastLinearToSlowEaseIn,
       this.duration = const Duration(milliseconds: 400),
-      this.startAnimationAfter = const Duration(milliseconds: 10)})
+      this.startAnimationAfter = const Duration(milliseconds: 10),
+      Key? key})
       : assert(initialOpacity >= 0 && initialOpacity <= 1),
-        assert(finalOpacity >= 0 && finalOpacity <= 1);
+        assert(finalOpacity >= 0 && finalOpacity <= 1),
+        super(key: key);
 
   @override
   _QudsAutoAnimatedOpacityState createState() =>

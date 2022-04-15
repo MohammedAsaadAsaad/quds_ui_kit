@@ -50,19 +50,20 @@ class QudsAnimatedCombinedIcons extends StatelessWidget {
   /// [curve] the curve of the transition velocity.
   /// [duration] the duration of the transition, initially set to `400 ms`
   /// [textDirection] the direction of the icons.
-  const QudsAnimatedCombinedIcons({
-    required this.startIcon,
-    required this.endIcon,
-    this.color,
-    this.startIconColor,
-    this.endIconColor,
-    this.iconSize,
-    this.showStartIcon = true,
-    this.withRotation,
-    this.curve = Curves.easeInCubic,
-    this.duration = const Duration(milliseconds: 400),
-    this.textDirection,
-  });
+  const QudsAnimatedCombinedIcons(
+      {required this.startIcon,
+      required this.endIcon,
+      this.color,
+      this.startIconColor,
+      this.endIconColor,
+      this.iconSize,
+      this.showStartIcon = true,
+      this.withRotation,
+      this.curve = Curves.easeInCubic,
+      this.duration = const Duration(milliseconds: 400),
+      this.textDirection,
+      Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -109,17 +110,19 @@ class QudsAnimatedCombinedIcons extends StatelessWidget {
           opacity: 1 - v,
         );
 
-        if (withRotation != false)
+        if (withRotation != false) {
           ico1 = Transform.rotate(
             angle: (1 - v) * pi / 2,
             child: ico1,
           );
+        }
 
-        if (withRotation != false)
+        if (withRotation != false) {
           ico2 = Transform.rotate(
             angle: v * -pi / 2,
             child: ico2,
           );
+        }
 
         ico1 = Align(
           child: ico1,

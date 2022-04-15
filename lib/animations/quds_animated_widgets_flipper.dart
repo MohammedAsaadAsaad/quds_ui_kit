@@ -28,20 +28,21 @@ class QudsAnimatedWidgetsFlipper extends StatelessWidget {
   /// [withRotation] indicates weather the icons will transite with rotation.
   /// [curve] the curve of the transition velocity.
   /// [duration] the duration of the transition, initially set to `400 ms`
-  const QudsAnimatedWidgetsFlipper({
-    required this.startChild,
-    required this.endChild,
-    this.showStartChild = true,
-    this.withRotation,
-    this.curve = Curves.fastLinearToSlowEaseIn,
-    this.duration = const Duration(milliseconds: 400),
-  });
+  const QudsAnimatedWidgetsFlipper(
+      {required this.startChild,
+      required this.endChild,
+      this.showStartChild = true,
+      this.withRotation,
+      this.curve = Curves.fastLinearToSlowEaseIn,
+      this.duration = const Duration(milliseconds: 400),
+      Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TweenAnimationBuilder<double>(
       duration: duration,
-      curve: this.curve,
+      curve: curve,
       tween: Tween<double>(
           begin: showStartChild ? 1 : 0, end: !showStartChild ? 0 : 1),
       builder: (c, v, _) {
@@ -56,17 +57,19 @@ class QudsAnimatedWidgetsFlipper extends StatelessWidget {
           opacity: 1 - v,
         );
 
-        if (withRotation != false)
+        if (withRotation != false) {
           ch1 = Transform.rotate(
             angle: (1 - v) * pi / 2,
             child: ch1,
           );
+        }
 
-        if (withRotation != false)
+        if (withRotation != false) {
           ch2 = Transform.rotate(
             angle: v * -pi / 2,
             child: ch2,
           );
+        }
 
         ch1 = Align(
           child: ch1,

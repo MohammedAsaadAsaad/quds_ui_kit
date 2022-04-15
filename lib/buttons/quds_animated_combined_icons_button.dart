@@ -88,12 +88,14 @@ class QudsAnimatedCombinedIconsButton extends StatelessWidget {
       this.padding = const EdgeInsets.all(8.0),
       this.duration = const Duration(milliseconds: 400),
       this.mouseCursor = SystemMouseCursors.click,
-      this.textDirection});
+      this.textDirection,
+      Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     Widget result = QudsAnimatedCombinedIcons(
-        curve: this.curve,
+        curve: curve,
         startIcon: startIcon,
         endIcon: endIcon,
         color: color,
@@ -116,11 +118,12 @@ class QudsAnimatedCombinedIconsButton extends StatelessWidget {
       child: result,
     );
 
-    if (tooltip != null)
+    if (tooltip != null) {
       result = Tooltip(
         message: tooltip!,
         child: result,
       );
+    }
 
     return QudsRadianButton(
       focusNode: focusNode,

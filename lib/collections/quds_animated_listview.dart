@@ -5,24 +5,30 @@ import 'package:quds_ui_kit/quds_ui_kit.dart';
 class QudsAnimatedListView extends ListView {
   /// Create an instance of [QudsAnimatedListView].
   QudsAnimatedListView(
-      {List<Widget>? children,
+      {Key? key,
+      List<Widget>? children,
       ScrollPhysics? physics,
       EdgeInsets? padding,
       bool keepChildrenAlive = true,
       SlideDirection slideDirection = SlideDirection.Start,
       Curve curve = Curves.bounceOut,
       Duration duration = const Duration(milliseconds: 500)})
-      : super(children: [
-          if (children != null)
-            for (var c in children)
-              _QudsAnimatedListTile(
-                keepAlive: keepChildrenAlive,
-                child: c,
-                curve: curve,
-                duration: duration,
-                slideDirection: slideDirection,
-              )
-        ], padding: padding, cacheExtent: 0, physics: physics);
+      : super(
+            key: key,
+            children: [
+              if (children != null)
+                for (var c in children)
+                  _QudsAnimatedListTile(
+                    keepAlive: keepChildrenAlive,
+                    child: c,
+                    curve: curve,
+                    duration: duration,
+                    slideDirection: slideDirection,
+                  )
+            ],
+            padding: padding,
+            cacheExtent: 0,
+            physics: physics);
 }
 
 class _QudsAnimatedListTile extends StatefulWidget {
@@ -52,16 +58,16 @@ class _QudsAnimatedListTileState extends State<_QudsAnimatedListTile>
     late Offset initialOffset;
     switch (widget.slideDirection) {
       case SlideDirection.Up:
-        initialOffset = Offset(0, 0.7);
+        initialOffset = const Offset(0, 0.7);
         break;
       case SlideDirection.Down:
-        initialOffset = Offset(0, -0.7);
+        initialOffset = const Offset(0, -0.7);
         break;
       case SlideDirection.Left:
-        initialOffset = Offset(0.4, 0);
+        initialOffset = const Offset(0.4, 0);
         break;
       case SlideDirection.Right:
-        initialOffset = Offset(-0.4, 0);
+        initialOffset = const Offset(-0.4, 0);
         break;
       case SlideDirection.Start:
         var isLTR = Directionality.of(context) == TextDirection.ltr;

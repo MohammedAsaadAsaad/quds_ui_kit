@@ -66,19 +66,19 @@ class _State extends State<QudsSplashView> {
         children: [
           if (w.logo != null) ...[
             w.logo!,
-            SizedBox(
+            const SizedBox(
               height: 10,
             )
           ],
           if (w.textUnderLogo != null) ...[
             Text(w.textUnderLogo!, style: w.textUnderLogoStyle),
-            SizedBox(
+            const SizedBox(
               height: 10,
             )
           ],
           if (w.showIndicator == true) ...[
-            w.progressIndicator ?? CircularProgressIndicator(),
-            SizedBox(
+            w.progressIndicator ?? const CircularProgressIndicator(),
+            const SizedBox(
               height: 10,
             )
           ]
@@ -95,14 +95,19 @@ class _State extends State<QudsSplashView> {
       executing = true;
     });
 
-    if (futures != null) for (var f in futures!) await f;
+    if (futures != null) {
+      for (var f in futures!) {
+        await f;
+      }
+    }
 
     await Future.delayed(widget.durationAfterExecutionFutures);
     widget.onCompleted?.call();
 
-    if (mounted)
+    if (mounted) {
       setState(() {
         executing = false;
       });
+    }
   }
 }

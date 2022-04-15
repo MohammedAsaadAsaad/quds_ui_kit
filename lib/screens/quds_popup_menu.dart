@@ -70,11 +70,12 @@ class _QudsPopupButtonState extends State<QudsPopupButton> {
       ),
     );
 
-    if (widget.tooltip != null)
+    if (widget.tooltip != null) {
       result = Tooltip(
         message: widget.tooltip!,
         child: result,
       );
+    }
     return result;
   }
 }
@@ -108,6 +109,9 @@ class QudsPopupMenuItem extends QudsPopupMenuBase {
   /// The event to be fired when the user press the item
   final VoidCallback onPressed;
 
+  /// The event to be fired when the user long-presses the item
+  final VoidCallback? onLongPressed;
+
   /// Weather to pop when the user press the item.
   final bool popOnTap;
 
@@ -115,6 +119,7 @@ class QudsPopupMenuItem extends QudsPopupMenuBase {
   QudsPopupMenuItem(
       {required this.title,
       required this.onPressed,
+      this.onLongPressed,
       this.popOnTap = true,
       this.subTitle,
       this.leading,
@@ -160,7 +165,7 @@ class QudsPopupMenuSection extends QudsPopupMenuBase {
     this.subTitle,
     this.leading,
     this.backgroundColor,
-  }) : assert(subItems.length > 0);
+  }) : assert(subItems.isNotEmpty);
 }
 
 /// Show [QudsPopupMenu] from calling button
@@ -172,14 +177,17 @@ void showQudsPopupMenu(
     {required BuildContext context,
     required List<QudsPopupMenuBase> items,
     bool useRootNavigator = false,
+    Offset? startOffset,
+    Offset? endOffset,
     Color? backgroundColor}) {
   final RenderBox button = context.findRenderObject()! as RenderBox;
   final RenderBox overlay =
       Navigator.of(context).overlay!.context.findRenderObject()! as RenderBox;
   final RelativeRect position = RelativeRect.fromRect(
     Rect.fromPoints(
-      button.localToGlobal(Offset.zero, ancestor: overlay),
-      button.localToGlobal(button.size.bottomRight(Offset.zero) + Offset.zero,
+      button.localToGlobal(startOffset ?? Offset.zero, ancestor: overlay),
+      button.localToGlobal(
+          endOffset ?? (button.size.bottomRight(Offset.zero) + Offset.zero),
           ancestor: overlay),
     ),
     Offset.zero & overlay.size,
@@ -220,7 +228,7 @@ class _QudsPopupMenuState extends State<_QudsPopupMenu> {
 
   @override
   Widget build(BuildContext context) {
-    var currentSection = sections.length == 0 ? null : sections.last;
+    var currentSection = sections.isEmpty ? null : sections.last;
     var currentItems = itemsStack.last;
     BorderRadius borderRadius = BorderRadius.circular(5);
     Widget result = Material(
@@ -232,12 +240,12 @@ class _QudsPopupMenuState extends State<_QudsPopupMenu> {
               child: QudsAutoAnimatedSize(
                   alignment: AlignmentDirectional.topStart,
                   startAfterDuration: const Duration(milliseconds: 0),
-                  child: Container(
+                  child: SizedBox(
                     width: 300,
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        if (sections.length > 0)
+                        if (sections.isNotEmpty)
                           Row(
                             children: [
                               IconButton(
@@ -248,7 +256,7 @@ class _QudsPopupMenuState extends State<_QudsPopupMenu> {
                                     Icons.arrow_back_ios_rounded,
                                     color: Theme.of(context).iconTheme.color,
                                   )),
-                              SizedBox(
+                              const SizedBox(
                                 width: 10,
                               ),
                               Text(
@@ -268,7 +276,7 @@ class _QudsPopupMenuState extends State<_QudsPopupMenu> {
 
     result = AnimatedContainer(
       decoration: BoxDecoration(
-          boxShadow: [BoxShadow(blurRadius: 5, color: Colors.black38)],
+          boxShadow: const [BoxShadow(blurRadius: 5, color: Colors.black38)],
           borderRadius: borderRadius,
           color: _getCurrentBackgroundColor(context)),
       duration: const Duration(milliseconds: 500),
@@ -293,18 +301,19 @@ class _QudsPopupMenuState extends State<_QudsPopupMenu> {
 
   Color _getCurrentBackgroundColor(BuildContext context) {
     Color? result;
-    for (int i = sections.length - 1; i > -1; i--)
+    for (int i = sections.length - 1; i > -1; i--) {
       if (sections[i].backgroundColor != null) {
         result = sections[i].backgroundColor;
         break;
       }
+    }
     result ??= widget.backgroundColor ?? result;
     result ??= Theme.of(context).scaffoldBackgroundColor;
     return result;
   }
 
   Widget _buildItem(QudsPopupMenuBase item) {
-    if (item is QudsPopupMenuSection)
+    if (item is QudsPopupMenuSection) {
       return ListTile(
         onTap: () => setState(() {
           sections.add(item);
@@ -313,18 +322,21 @@ class _QudsPopupMenuState extends State<_QudsPopupMenu> {
         leading: item.leading,
         subtitle: item.subTitle,
         title: Text(item.titleText),
-        trailing: Icon(Icons.arrow_forward_ios),
+        trailing: const Icon(Icons.arrow_forward_ios),
       );
+    }
 
-    if (item is QudsPopupMenuDivider)
+    if (item is QudsPopupMenuDivider) {
       return Divider(
         height: item.height,
         thickness: item.thickness,
         color: item.color,
       );
+    }
 
-    if (item is QudsPopupMenuItem)
+    if (item is QudsPopupMenuItem) {
       return ListTile(
+        onLongPress: item.onLongPressed,
         onTap: () {
           if (item.popOnTap == true) Navigator.pop(context);
           item.onPressed.call();
@@ -334,6 +346,7 @@ class _QudsPopupMenuState extends State<_QudsPopupMenu> {
         leading: item.leading,
         trailing: item.trailing,
       );
+    }
 
     if (item is QudsPopupMenuWidget) return item.builder(context);
 
@@ -482,16 +495,18 @@ class _PopupMenuRouteLayout extends SingleChildLayoutDelegate {
 
     // Avoid going outside an area defined as the rectangle 8.0 pixels from the
     // edge of the screen in every direction.
-    if (x < _kMenuScreenPadding + padding.left)
+    if (x < _kMenuScreenPadding + padding.left) {
       x = _kMenuScreenPadding + padding.left;
-    else if (x + childSize.width >
-        size.width - _kMenuScreenPadding - padding.right)
+    } else if (x + childSize.width >
+        size.width - _kMenuScreenPadding - padding.right) {
       x = size.width - childSize.width - _kMenuScreenPadding - padding.right;
-    if (y < _kMenuScreenPadding + padding.top)
+    }
+    if (y < _kMenuScreenPadding + padding.top) {
       y = _kMenuScreenPadding + padding.top;
-    else if (y + childSize.height >
-        size.height - _kMenuScreenPadding - padding.bottom)
+    } else if (y + childSize.height >
+        size.height - _kMenuScreenPadding - padding.bottom) {
       y = size.height - padding.bottom - _kMenuScreenPadding - childSize.height;
+    }
 
     return Offset(x, y);
   }

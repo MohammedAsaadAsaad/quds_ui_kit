@@ -31,7 +31,9 @@ class QudsAutoAnimatedSlide extends StatefulWidget {
       this.yOffset = 0,
       this.curve = Curves.fastLinearToSlowEaseIn,
       this.duration = const Duration(milliseconds: 400),
-      this.startAnimationAfter = const Duration(milliseconds: 10)});
+      this.startAnimationAfter = const Duration(milliseconds: 10),
+      Key? key})
+      : super(key: key);
 
   @override
   _QudsAutoAnimatedOpacityState createState() =>

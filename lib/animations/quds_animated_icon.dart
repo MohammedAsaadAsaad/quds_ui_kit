@@ -43,7 +43,9 @@ class QudsAnimatedIcon extends StatefulWidget {
       this.iconSize,
       this.showStartIcon = true,
       this.textDirection,
-      this.duration = const Duration(milliseconds: 250)});
+      this.duration = const Duration(milliseconds: 250),
+      Key? key})
+      : super(key: key);
 
   @override
   _QudsAnimatedIconState createState() => _QudsAnimatedIconState();
@@ -77,10 +79,11 @@ class _QudsAnimatedIconState extends State<QudsAnimatedIcon>
     var t = widget.showStartIcon != false;
     if (_showFirst != t) {
       _showFirst = t;
-      if (_showFirst)
+      if (_showFirst) {
         _animationController.reverse();
-      else
+      } else {
         _animationController.forward();
+      }
     }
     var sColor =
         widget.startIconColor ?? widget.color ?? IconTheme.of(context).color!;

@@ -29,7 +29,9 @@ class QudsAutoAnimatedBlur extends StatefulWidget {
       this.intialBlurRadius = 10,
       this.curve = Curves.fastLinearToSlowEaseIn,
       this.duration = const Duration(milliseconds: 500),
-      this.startAnimationAfter = const Duration(milliseconds: 10)});
+      this.startAnimationAfter = const Duration(milliseconds: 10),
+      Key? key})
+      : super(key: key);
 
   @override
   _QudsAutoAnimatedBlurState createState() => _QudsAutoAnimatedBlurState();
@@ -41,12 +43,13 @@ class _QudsAutoAnimatedBlurState extends State<QudsAutoAnimatedBlur> {
   late Timer _tmr;
   @override
   void initState() {
-    _radius = this.widget.intialBlurRadius;
+    _radius = widget.intialBlurRadius;
     _tmr = Timer(widget.startAnimationAfter, () {
-      if (mounted)
+      if (mounted) {
         setState(() {
           _radius = 0;
         });
+      }
     });
     super.initState();
   }
@@ -60,14 +63,14 @@ class _QudsAutoAnimatedBlurState extends State<QudsAutoAnimatedBlur> {
   @override
   Widget build(BuildContext context) {
     return TweenAnimationBuilder<double>(
-      curve: this.widget.curve,
+      curve: widget.curve,
       tween: Tween<double>(begin: 1, end: 0),
-      duration: this.widget.duration,
+      duration: widget.duration,
       builder: (c, v, w) => ClipRect(
           child: Stack(
         alignment: Alignment.center,
         children: [
-          this.widget.child,
+          widget.child,
           BackdropFilter(
               filter:
                   ImageFilter.blur(sigmaX: v * _radius, sigmaY: v * _radius),

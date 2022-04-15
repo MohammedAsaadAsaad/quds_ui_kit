@@ -77,10 +77,8 @@ class _State extends State<QudsAnimatedText> with TickerProviderStateMixin {
       ],
     );
 
-    return Container(
-      child: Center(
-        child: result,
-      ),
+    return Center(
+      child: result,
     );
   }
 
