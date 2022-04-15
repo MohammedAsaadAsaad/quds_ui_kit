@@ -48,7 +48,7 @@ class QudsLightDrawer extends StatelessWidget {
               color: theme.primaryColor,
               shadowColor: theme.iconTheme.color!,
               child: Container(
-                margin: EdgeInsets.only(top: 0),
+                margin: const EdgeInsets.only(top: 0),
                 width: min(size.width * .8, 304),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,7 +74,7 @@ class QudsLightDrawer extends StatelessWidget {
         ? BorderRadius.only(topRight: radius, bottomRight: radius)
         : BorderRadius.only(topLeft: radius, bottomLeft: radius);
     return Container(
-        margin: EdgeInsetsDirectional.only(end: 5),
+        margin: const EdgeInsetsDirectional.only(end: 5),
         width: double.infinity,
         child: ClipRRect(
           borderRadius: borderRadius,
@@ -89,20 +89,20 @@ class QudsLightDrawer extends StatelessWidget {
   Widget _buildHeader(BuildContext context) {
     Widget result =
         Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-      QudsBackIconButton(),
+      const QudsBackIconButton(),
       Expanded(child: Container()),
       if (titleButton != null) titleButton!
     ]);
-    result = Container(child: result, padding: EdgeInsets.all(5));
+    result = Container(child: result, padding: const EdgeInsets.all(5));
     return _revampIconAndText(context, result);
   }
 
   Widget _buildBottom(BuildContext context) {
     Widget result = Row(children: [
-      Expanded(child: this.bottomAboutButton ?? Container()),
-      this.bottomButton ?? Container()
+      Expanded(child: bottomAboutButton ?? Container()),
+      bottomButton ?? Container()
     ]);
-    result = Container(child: result, padding: EdgeInsets.all(5));
+    result = Container(child: result, padding: const EdgeInsets.all(5));
     return _revampIconAndText(context, result);
   }
 

@@ -60,13 +60,13 @@ class QudsTransitionPageRoute<T> extends PageRoute<T> {
   String? get barrierLabel => '';
 
   @override
-  Curve get barrierCurve => this.curve;
+  Curve get barrierCurve => curve;
 
   @override
   Widget buildTransitions(BuildContext context, Animation<double> animation,
       Animation<double> secondaryAnimation, Widget child) {
     var ch = child;
-    if (this.withRotate) {
+    if (withRotate) {
       ch = RotationTransition(
         turns: Tween<double>(begin: 0.85, end: 1).animate(animation),
         child: ch,
@@ -80,41 +80,40 @@ class QudsTransitionPageRoute<T> extends PageRoute<T> {
       );
     }
 
-    if (this.withZoom) {
+    if (withZoom) {
       ch = ScaleTransition(
-        alignment: this.scaleAlignment,
-        scale: Tween<double>(
-                begin: this.zoomType == ZoomType.In ? 0.8 : 1.2, end: 1)
+        alignment: scaleAlignment,
+        scale: Tween<double>(begin: zoomType == ZoomType.In ? 0.8 : 1.2, end: 1)
             .animate(animation),
         child: ch,
       );
 
       ch = ScaleTransition(
-          alignment: this.scaleAlignment,
-          scale: Tween<double>(
-                  begin: 1, end: this.zoomType == ZoomType.In ? 1.7 : 0.3)
-              .animate(secondaryAnimation),
+          alignment: scaleAlignment,
+          scale:
+              Tween<double>(begin: 1, end: zoomType == ZoomType.In ? 1.7 : 0.3)
+                  .animate(secondaryAnimation),
           child: ch);
     }
 
-    if (this.withFade) {
+    if (withFade) {
       ch = FadeTransition(
-        opacity: CurvedAnimation(curve: this.curve, parent: animation),
+        opacity: CurvedAnimation(curve: curve, parent: animation),
         child: ch,
       );
     }
-    if (this.withSlide) {
+    if (withSlide) {
       var isLTR = Directionality.of(context) == TextDirection.ltr;
 
       var offset = Offset.zero;
 
-      switch (this.slideDirection) {
+      switch (slideDirection) {
         case SlideDirection.Left:
-          offset = Offset(0.5, 0);
+          offset = const Offset(0.5, 0);
           break;
 
         case SlideDirection.Right:
-          offset = Offset(-0.5, 0);
+          offset = const Offset(-0.5, 0);
           break;
 
         case SlideDirection.Start:
@@ -126,11 +125,11 @@ class QudsTransitionPageRoute<T> extends PageRoute<T> {
           break;
 
         case SlideDirection.Up:
-          offset = Offset(0, 0.5);
+          offset = const Offset(0, 0.5);
           break;
 
         case SlideDirection.Down:
-          offset = Offset(0, -0.5);
+          offset = const Offset(0, -0.5);
           break;
       }
 
@@ -162,5 +161,5 @@ class QudsTransitionPageRoute<T> extends PageRoute<T> {
   bool get maintainState => true;
 
   @override
-  Duration get transitionDuration => this.duration;
+  Duration get transitionDuration => duration;
 }

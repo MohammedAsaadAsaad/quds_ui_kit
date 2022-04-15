@@ -33,7 +33,7 @@ class QudsBlurPageRoute<T> extends PageRoute<T> {
   String? get barrierLabel => '';
 
   @override
-  Curve get barrierCurve => this.curve;
+  Curve get barrierCurve => curve;
 
   @override
   Widget buildTransitions(BuildContext context, Animation<double> animation,
@@ -48,18 +48,18 @@ class QudsBlurPageRoute<T> extends PageRoute<T> {
       Animation<double> secondaryAnimation) {
     Widget ch = builder(context);
     return FadeTransition(
-        opacity: CurveTween(curve: this.curve).animate(animation),
+        opacity: CurveTween(curve: curve).animate(animation),
         child: QudsAutoAnimatedBlur(
-            startAnimationAfter: this.duration,
+            startAnimationAfter: duration,
             child: ch,
-            curve: this.curve,
-            intialBlurRadius: this.initialBlurRadius,
-            duration: this.duration));
+            curve: curve,
+            intialBlurRadius: initialBlurRadius,
+            duration: duration));
   }
 
   @override
   bool get maintainState => true;
 
   @override
-  Duration get transitionDuration => this.duration;
+  Duration get transitionDuration => duration;
 }

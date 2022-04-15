@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:flutter/material.dart';
 
 /// Show customizable buatiful toast.
@@ -24,7 +26,7 @@ Future showQudsToast(BuildContext context,
           child: Material(
               color: Colors.transparent,
               child: Container(
-                  padding: EdgeInsets.all(6),
+                  padding: const EdgeInsets.all(6),
                   child: IntrinsicHeight(
                       child: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -39,7 +41,7 @@ Future showQudsToast(BuildContext context,
                           style: theme.primaryTextTheme.bodyText1!
                               .copyWith(fontSize: 18),
                           child: content ??
-                              Container(
+                              const SizedBox(
                                 width: 5,
                                 height: 5,
                               )),

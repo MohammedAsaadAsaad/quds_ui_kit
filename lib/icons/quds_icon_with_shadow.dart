@@ -32,7 +32,7 @@ class QudsIconWithShadow extends StatelessWidget {
       : super(key: key);
   @override
   Widget build(BuildContext context) {
-    var icoColor = this.color ?? IconTheme.of(context).color;
+    var icoColor = color ?? IconTheme.of(context).color;
     var icon = Icon(
       iconData,
       color: icoColor,
@@ -47,12 +47,12 @@ class QudsIconWithShadow extends StatelessWidget {
       textDirection: textDirection,
     );
 
-    var offset = this.offset ?? Offset(2, 2);
+    var offset = this.offset ?? const Offset(2, 2);
 
     return Stack(
       children: [
         Positioned.directional(
-          textDirection: this.textDirection ?? Directionality.of(context),
+          textDirection: textDirection ?? Directionality.of(context),
           child: shadowIcon,
           top: offset.dy,
           start: offset.dx,

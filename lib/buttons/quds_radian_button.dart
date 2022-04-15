@@ -50,11 +50,12 @@ class QudsRadianButton extends StatelessWidget {
       ),
     );
 
-    if (tooltip != null)
+    if (tooltip != null) {
       result = Tooltip(
         message: tooltip!,
         child: result,
       );
+    }
     return result;
   }
 }

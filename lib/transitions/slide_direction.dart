@@ -1,4 +1,6 @@
 /// The slide transition direction.
+// ignore_for_file: constant_identifier_names
+
 enum SlideDirection {
   /// Slide to [Up].
   Up,
