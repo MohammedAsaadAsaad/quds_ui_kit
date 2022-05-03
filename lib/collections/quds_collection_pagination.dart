@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quds_ui_kit/quds_ui_kit.dart';
 
 /// A widget that show list of items with pagining.
 class QudsCollectionPagination<T> extends StatelessWidget {
@@ -88,12 +89,15 @@ class QudsCollectionPagination<T> extends StatelessWidget {
 
     return isPortrait
         ? Material(
-            elevation: 3,
+            elevation: 1,
             child: Container(
-              padding: const EdgeInsets.only(bottom: 10),
+              padding: const EdgeInsets.only(bottom: 2),
               child: Column(
                 children: <Widget>[
-                  _buildPagesControls(context),
+                  _widgetsCollection(isRow: isPortrait, children: [
+                    _buildPageResultsCount(context),
+                    _buildPagesControls(context),
+                  ]),
                   _buildResultsStatistics(context),
                 ],
               ),
@@ -108,7 +112,10 @@ class QudsCollectionPagination<T> extends StatelessWidget {
                 padding: const EdgeInsets.only(bottom: 10),
                 child: Row(
                   children: <Widget>[
-                    _buildPagesControls(context),
+                    _widgetsCollection(isRow: isPortrait, children: [
+                      _buildPageResultsCount(context),
+                      _buildPagesControls(context),
+                    ]),
                     _buildResultsStatistics(context),
                   ],
                 ),
@@ -162,45 +169,38 @@ class QudsCollectionPagination<T> extends StatelessWidget {
         }
       }
     }
-    for (int i = 1; i <= pages.length; i++) {}
+    // for (int i = 1; i <= pages.length; i++) {}
     //Temp
     var result = isPortrait
         ? SingleChildScrollView(
             scrollDirection: Axis.horizontal,
-            padding: const EdgeInsets.all(5),
+            padding: const EdgeInsets.all(2),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: widgetNums.isEmpty ? [] : widgetNums,
             ),
           )
         : SingleChildScrollView(
-            padding: const EdgeInsets.all(5),
+            padding: const EdgeInsets.all(2),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: widgetNums.isEmpty ? [] : widgetNums,
             ),
           );
 
-    return Container(
-      margin: const EdgeInsets.all(4),
-      child: result,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-          color: Theme.of(context).scaffoldBackgroundColor,
-          boxShadow: const [BoxShadow(blurRadius: 5, color: Colors.black26)]),
-    );
+    return _buildDecoratedBox(context, result);
   }
 
   Widget _buildNumButton(int? i, BuildContext context) {
     var style = Theme.of(context).textTheme.bodyText1!;
     var border = BorderRadius.circular(3);
     return Material(
-      borderRadius: border,
+      color: Colors.transparent,
       // elevation: i == null ? 0 : 3,
       child: InkWell(
         customBorder: RoundedRectangleBorder(borderRadius: border),
         child: Container(
-          child: Text(i == null ? '...' : i.toString(),
+          child: Text(i == null ? '..' : i.toString(),
               style: i == selectedPage
                   ? style.copyWith(
                       height: 0.8, fontWeight: FontWeight.bold, fontSize: 30)
@@ -213,6 +213,7 @@ class QudsCollectionPagination<T> extends StatelessWidget {
   }
 
   Widget _buildResultsStatistics(BuildContext context) {
+    return const SizedBox();
     var isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
     var style = const TextStyle(fontSize: 18);
 
@@ -225,58 +226,79 @@ class QudsCollectionPagination<T> extends StatelessWidget {
             isRow: isPortrait,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              _widgetsCollection(
-                isRow: isPortrait,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    ((selectedPage - 1) * resultsPerPage + 1).toString() +
-                        ' - ' +
-                        ((selectedPage - 1) * resultsPerPage +
-                                currentPageItems.length)
-                            .toString(),
-                    style: style,
-                  ),
-                  Text(
-                    isPortrait ? ' \\ ' : 'ــــ',
-                    style: style.copyWith(
-                        height: isPortrait ? null : 0,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    total.toString(),
-                    style: style,
-                  ),
-                ],
-              ),
-              const SizedBox(
-                width: 15,
-                height: 15,
-              ),
-              Row(
-                children: <Widget>[
-                  DropdownButton<int>(
-                    value: resultsPerPage,
-                    items: pageItemLengths
-                        .map<DropdownMenuItem<int>>(
-                            (e) => DropdownMenuItem<int>(
-                                  child: Text(
-                                    e.toString(),
-                                    style: const TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  value: e,
-                                ))
-                        .toList(),
-                    onChanged: (value) => onResultsPerPageChanged?.call(value!),
-                  )
-                ],
-              )
+              Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(4),
+                      boxShadow: const [
+                        BoxShadow(
+                          color: Colors.black38,
+                          blurRadius: 2,
+                        )
+                      ],
+                      color: Theme.of(context).scaffoldBackgroundColor),
+                  child: _widgetsCollection(
+                    isRow: isPortrait,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        ((selectedPage - 1) * resultsPerPage + 1).toString() +
+                            ' - ' +
+                            ((selectedPage - 1) * resultsPerPage +
+                                    currentPageItems.length)
+                                .toString(),
+                        style: style,
+                      ),
+                      Text(
+                        isPortrait ? ' \\ ' : 'ــــ',
+                        style: style.copyWith(
+                            height: isPortrait ? null : 0,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      Text(
+                        total.toString(),
+                        style: style,
+                      ),
+                    ],
+                  )),
             ],
           ))),
     );
 
+    return result;
+  }
+
+  Widget _buildDecoratedBox(BuildContext context, Widget child,
+      {Color? color}) {
+    return Container(
+      margin: const EdgeInsets.all(2),
+      child: child,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(4),
+          color: color ?? Theme.of(context).scaffoldBackgroundColor,
+          boxShadow: const [BoxShadow(blurRadius: 0.5, color: Colors.black26)]),
+    );
+  }
+
+  Widget _buildPageResultsCount(BuildContext context) {
+    Widget result = QudsPopupButton(
+      child: Text(resultsPerPage.toString(),
+          style: const TextStyle(
+              height: 1,
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 20)),
+      items: [
+        for (var p in pageItemLengths)
+          QudsPopupMenuItem(
+              title: Text(p.toString()),
+              onPressed: () => onResultsPerPageChanged?.call(p))
+      ],
+    );
+    result = Container(
+      constraints: const BoxConstraints(minHeight: 40, minWidth: 40),
+      child: Center(child: result),
+    );
+    result = _buildDecoratedBox(context, result, color: Colors.blue.shade300);
     return result;
   }
 
@@ -306,13 +328,25 @@ class QudsCollectionPagination<T> extends StatelessWidget {
           {required List<Widget> children,
           bool isRow = true,
           MainAxisAlignment mainAxisAlignment = MainAxisAlignment.center}) =>
-      isRow
-          ? Row(
-              mainAxisAlignment: mainAxisAlignment,
-              children: children,
-            )
-          : Column(
-              mainAxisAlignment: mainAxisAlignment,
-              children: children,
-            );
+      SingleChildScrollView(
+          scrollDirection: isRow ? Axis.horizontal : Axis.vertical,
+          child: isRow
+              ? Row(
+                  mainAxisAlignment: mainAxisAlignment,
+                  children: [
+                    for (var c in children)
+                      Padding(
+                          child: c,
+                          padding: const EdgeInsets.symmetric(horizontal: 2))
+                  ],
+                )
+              : Column(
+                  mainAxisAlignment: mainAxisAlignment,
+                  children: [
+                    for (var c in children)
+                      Padding(
+                          child: c,
+                          padding: const EdgeInsets.symmetric(vertical: 2))
+                  ],
+                ));
 }
